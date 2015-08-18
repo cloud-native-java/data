@@ -1,0 +1,58 @@
+--- 
+config:
+  image: kbastani/config-microservice
+  links:
+    - discovery
+  ports:
+    - "8888:8888"
+discovery:
+  image: kbastani/discovery-microservice
+  ports:
+    - "8761:8761"
+gateway:
+  image: kbastani/api-gateway-microservice
+  links:
+    - discovery
+    - config
+    - recommendation
+    - movie
+    - user
+    - rating
+  ports:
+    - "10000:10000"
+movie:
+  hostname: movie
+  image: kbastani/movie-microservice
+  links:
+    - discovery
+    - config
+  ports: 
+    - "9006:9006"
+moviesui:
+  image: kbastani/movies-ui
+  links:
+    - discovery
+    - config
+  ports:
+    - "1111:1111"
+rating:
+  hostname: rating
+  image: kbastani/rating-microservice
+  links:
+    - discovery
+    - config
+  ports:
+    - "9004:9004"
+recommendation:
+  hostname: recommendation
+  image: kbastani/recommendation-microservice
+  links:
+    - discovery
+    - config
+  ports:
+    - "9006:9006"
+user:
+  image: kbastani/users-microservice
+  links:
+    - discovery
+    - config

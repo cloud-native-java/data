@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: cloud
+---
+spring:
+  profiles:
+    name: cloud
+  application:
+    name: rating
+  cloud:
+    config:
+      uri: http://config-99.cfapps.io/
+      enabled: true
+encrypt:
+  failOnError: false
