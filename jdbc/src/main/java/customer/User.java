@@ -1,4 +1,4 @@
-package demo;
+package customer;
 
 public class User {
 
