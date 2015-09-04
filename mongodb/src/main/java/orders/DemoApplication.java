@@ -1,4 +1,4 @@
-package customer;
+package orders;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

@@ -1,4 +1,4 @@
-package customer;
+package jdbc;
 
 public class User {
 
