@@ -17,7 +17,6 @@ import java.io.Serializable;
 @Setter
 @RequiredArgsConstructor
 @ToString
-@SuppressWarnings({"serial", "unused" })
 public class Address {
 
     private

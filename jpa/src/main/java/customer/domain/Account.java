@@ -20,7 +20,6 @@ import java.util.Set;
 @Setter
 @RequiredArgsConstructor
 @ToString
-@SuppressWarnings({"serial", "MismatchedQueryAndUpdateOfCollection", "unused"})
 public class Account {
 
     private
@@ -38,7 +37,7 @@ public class Account {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     final Set<Address> addresses;
 
-    Account() {
+    public Account() {
         this.accountNumber = null;
         this.creditCards = new HashSet<>();
         this.addresses = new HashSet<>();

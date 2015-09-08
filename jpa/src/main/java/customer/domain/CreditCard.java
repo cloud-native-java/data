@@ -18,8 +18,8 @@ import java.io.Serializable;
 @Setter
 @RequiredArgsConstructor
 @ToString
-@SuppressWarnings({"serial", "unused" })
 public class CreditCard {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id;
@@ -46,4 +46,5 @@ public class CreditCard {
             this.creditCardId = null;
         }
     }
+
 }
