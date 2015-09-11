@@ -12,7 +12,6 @@ import java.util.Set;
  *
  * @author Kenny Bastani
  */
-
 @Entity
 @Table(name = "account")
 @EqualsAndHashCode(of = "id")
