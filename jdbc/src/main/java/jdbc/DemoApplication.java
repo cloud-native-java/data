@@ -45,10 +45,10 @@ public class DemoApplication implements CommandLineRunner {
                 "first_name VARCHAR(255), last_name VARCHAR(255), email VARCHAR(255))");
 
         // Split each supplied string into columns using the space symbol as a delimiter
-        List<Object[]> splitUserRecords = Arrays.asList("Michael Hunger michael.hunger@gmail.com",
-                "Bridget Kromhout bridget.kromhout@yahoo.com",
+        List<Object[]> splitUserRecords = Arrays.asList("Michael Hunger michael.hunger@jexp.de",
+                "Bridget Kromhout bridget@outlook.com",
                 "Kenny Bastani kbastani@gmail.com",
-                "Josh Long jlong@gmail.com")
+                "Josh Long starbuxman@gmail.com")
                 .stream()
                 .map(name -> name.split(" "))
                 .collect(Collectors.toList());
@@ -73,7 +73,7 @@ public class DemoApplication implements CommandLineRunner {
                                 rs.getString("email")))
                 .forEach(user -> log.info(user.toString()));
 
-        log.warn("Use a JPA Repository to query for all users that we just inserted using JDBC template");
+        log.warn("Use a JPA Repository to query for all users that we just inserted with the JdbcTemplate");
 
         // Now use the JPA-based UserRepository to query for data
         userRepository.findAll().forEach(user -> log.info(user.toString()));

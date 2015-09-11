@@ -94,5 +94,15 @@ public class OrderApplication implements CommandLineRunner {
 
         // Log the result
         log.info(order.toString());
+
+        Product cloudFoundrySwag = new Product("Cloud Foundry Swag", "SKU-1765");
+
+        cloudFoundrySwag = productRepository.save(cloudFoundrySwag);
+
+        // Update the object
+        order.getProducts().add(cloudFoundrySwag);
+
+        // The lastModified and createdAt timestamps should now be different
+        log.info(orderRepository.save(order).toString());
     }
 }

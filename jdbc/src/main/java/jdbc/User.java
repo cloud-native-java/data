@@ -3,7 +3,6 @@ package jdbc;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-
 @Entity // <1>
 public class User {
 
