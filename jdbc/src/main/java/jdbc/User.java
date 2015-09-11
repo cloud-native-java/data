@@ -1,12 +1,22 @@
 package jdbc;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class User {
 
+    // Private fields <1>
     Long id;
     String firstName;
     String lastName;
     String email;
 
+    // No argument constructor for JPA <2>
+    public User() {
+    }
+
+    // Overloaded constructors can be used to initialize required fields <3>
     public User(Long id, String firstName, String lastName, String email) {
         this.id = id;
         this.firstName = firstName;
@@ -14,6 +24,13 @@ public class User {
         this.email = email;
     }
 
+    // Public getters and setters <4>
+
+    /**
+     * An ID field is required for most Spring Data projects and is used
+     * to uniquely identify an object in a data store.
+     */
+    @Id
     public Long getId() {
         return id;
     }
