@@ -1,33 +1,43 @@
-package jdbc;
+package service.customer;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import service.account.Account;
+import service.data.BaseEntity;
 
-@Entity // <1>
-public class User {
+import javax.persistence.*;
+import java.io.Serializable;
 
-    //<2>
+/**
+ * The {@link Customer} entity is a root object in the customer bounded context.
+ *
+ * @author Kenny Bastani
+ * @author Josh Long
+ */
+@Entity
+public class Customer extends BaseEntity implements Serializable {
+
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
+    private Account account;
 
-    public User() { //<3>
+    public Customer() {
     }
 
-    public User(Long id, String firstName, String lastName, String email) { //<4>
-        this.id = id;
+    public Customer(String firstName, String lastName, String email, Account account) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.account = account;
     }
 
-    @Id // <5>
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) { //<6>
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -55,13 +65,23 @@ public class User {
         this.email = email;
     }
 
+    @OneToOne(cascade = CascadeType.ALL)
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
+        return "Customer{" +
+                "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", account=" + account +
                 '}';
     }
 }

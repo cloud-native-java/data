@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: cloud
+---
+spring:
+  profiles: cloud
+  jackson:
+    serialization:
+      indent_output: true
