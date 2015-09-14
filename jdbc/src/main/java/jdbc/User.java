@@ -12,6 +12,8 @@ public class User {
     private String lastName;
     private String email;
 
+    // ... Getters omitted
+
     public User() { //<3>
     }
 

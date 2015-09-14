@@ -26,7 +26,6 @@ public class Account extends BaseEntity {
     }
 
     public Account(String accountNumber, Set<CreditCard> creditCards, Set<Address> addresses) {
-
         this.accountNumber = accountNumber;
         this.creditCards = creditCards;
         this.addresses = addresses;

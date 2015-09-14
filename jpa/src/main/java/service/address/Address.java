@@ -30,7 +30,6 @@ public class Address extends BaseEntity {
     public Address(String street1, String street2, String state,
                    String city, String country, AddressType addressType,
                    Integer zipCode) {
-
         this.street1 = street1;
         this.street2 = street2;
         this.state = state;
