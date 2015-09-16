@@ -1,5 +1,6 @@
 package service;
 
+import demo.CustomerApplication;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,13 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import service.account.Account;
-import service.address.Address;
-import service.address.AddressType;
-import service.creditcard.CreditCard;
-import service.creditcard.CreditCardType;
-import service.customer.Customer;
-import service.customer.CustomerRepository;
+import demo.account.Account;
+import demo.address.Address;
+import demo.address.AddressType;
+import demo.creditcard.CreditCard;
+import demo.creditcard.CreditCardType;
+import demo.customer.Customer;
+import demo.customer.CustomerRepository;
 
 import java.util.HashSet;
 

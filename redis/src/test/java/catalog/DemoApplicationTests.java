@@ -1,6 +1,6 @@
 package catalog;
 
-import catalog.DemoApplication;
+import demo.DemoApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;

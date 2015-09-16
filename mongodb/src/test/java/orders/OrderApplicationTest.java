@@ -1,14 +1,15 @@
 package orders;
 
+import demo.OrderApplication;
 import junit.framework.TestCase;
-import orders.domain.Invoice;
-import orders.domain.Order;
-import orders.domain.Product;
-import orders.domain.Shipment;
-import orders.repositories.InvoiceRepository;
-import orders.repositories.OrderRepository;
-import orders.repositories.ProductRepository;
-import orders.repositories.ShipmentRepository;
+import demo.invoice.Invoice;
+import demo.order.Order;
+import demo.product.Product;
+import demo.shipment.Shipment;
+import demo.invoice.InvoiceRepository;
+import demo.order.OrderRepository;
+import demo.product.ProductRepository;
+import demo.shipment.ShipmentRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -92,4 +93,6 @@ public class OrderApplicationTest extends TestCase {
         // The lastModified and createdAt timestamps should now be different
         log.info(orderRepository.save(order).toString());
     }
+
+
 }
