@@ -3,8 +3,8 @@ package demo;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity // <1>
-public class User {
+@Entity
+public class User { //<1>
 
     //<2>
     private Long id;
@@ -14,7 +14,7 @@ public class User {
 
     // ... Getters omitted
 
-    public User() { //<3>
+    public User() {
     }
 
     public User(Long id, String firstName, String lastName, String email) { //<4>
@@ -24,7 +24,7 @@ public class User {
         this.email = email;
     }
 
-    @Id // <5>
+    @Id
     public Long getId() {
         return id;
     }
