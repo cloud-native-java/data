@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import demo.account.Account;
 import demo.address.Address;
@@ -21,6 +22,7 @@ import java.util.HashSet;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = CustomerApplication.class)
+@ActiveProfiles(profiles = "test")
 public class CustomerApplicationTest extends TestCase {
 
     private Logger log = LoggerFactory.getLogger(CustomerApplicationTest.class);

@@ -38,8 +38,8 @@ public class DemoApplication {
             // Split each supplied string into columns using the space symbol as a delimiter
             List<Object[]> splitUserRecords = Arrays.asList("Michael Hunger michael.hunger@jexp.de",
                     "Bridget Kromhout bridget@outlook.com",
-                    "Kenny Bastani kbastani@gmail.com",
-                    "Josh Long starbuxman@gmail.com")
+                    "Kenny Bastani kbastani@yahoo.com",
+                    "Josh Long jlong@hotmail.com")
                     .stream()
                     .map(name -> name.split(" "))
                     .collect(Collectors.toList());
@@ -52,11 +52,11 @@ public class DemoApplication {
             jdbcTemplate.batchUpdate("INSERT INTO user(first_name, last_name, email) VALUES (?,?,?)",
                     splitUserRecords);
 
-            log.info("Querying for customer records where first_name = 'Bridget':");
+            log.info("Querying for customer records where first_name = 'Josh':");
 
-            // Use the JdbcTemplate query method to search for records with the first name Bridget
+            // Use the JdbcTemplate query method to search for records with the first name Josh
             jdbcTemplate.query("SELECT id, first_name, last_name, email FROM user WHERE first_name = ?",
-                    new Object[]{"Bridget"},
+                    new Object[]{"Josh"},
                     (rs, rowNum) ->
                             new User(rs.getLong("id"),
                                     rs.getString("first_name"),
