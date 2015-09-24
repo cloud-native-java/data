@@ -1,6 +1,6 @@
 package service;
 
-import demo.CustomerApplication;
+import demo.AccountApplication;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,11 +21,11 @@ import demo.customer.CustomerRepository;
 import java.util.HashSet;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = CustomerApplication.class)
+@SpringApplicationConfiguration(classes = AccountApplication.class)
 @ActiveProfiles(profiles = "test")
-public class CustomerApplicationTest extends TestCase {
+public class AccountApplicationTests extends TestCase {
 
-    private Logger log = LoggerFactory.getLogger(CustomerApplicationTest.class);
+    private Logger log = LoggerFactory.getLogger(AccountApplicationTests.class);
 
     @Autowired
     CustomerRepository customerRepository;
