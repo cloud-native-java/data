@@ -1,5 +1,12 @@
 package demo.domain;
 
+/**
+ * An abstract base class that is inherited by other domain classes
+ * in the order application context.
+ *
+ * @author Kenny Bastani
+ * @author Josh Long
+ */
 public class BaseEntity {
 
     private Long lastModified, createdAt;

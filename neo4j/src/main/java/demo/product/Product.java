@@ -1,24 +1,34 @@
 package demo.product;
 
-import demo.domain.BaseEntity;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.NodeEntity;
 
-@Document
-public class Product extends BaseEntity {
+/**
+ * A simple domain class for the {@link Product} concept in the order context.
+ *
+ * @author Kenny Bastani
+ * @author Josh Long
+ */
+@NodeEntity
+public class Product {
 
-    private String id;
+    @GraphId
+    private Long id;
     private String name, sku;
+
+    public Product() {
+    }
 
     public Product(String name, String sku) {
         this.name = name;
         this.sku = sku;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

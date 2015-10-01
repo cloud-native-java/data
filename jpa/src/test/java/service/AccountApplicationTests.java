@@ -1,6 +1,13 @@
 package service;
 
 import demo.AccountApplication;
+import demo.account.Account;
+import demo.address.Address;
+import demo.address.AddressType;
+import demo.creditcard.CreditCard;
+import demo.creditcard.CreditCardType;
+import demo.customer.Customer;
+import demo.customer.CustomerRepository;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,15 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import demo.account.Account;
-import demo.address.Address;
-import demo.address.AddressType;
-import demo.creditcard.CreditCard;
-import demo.creditcard.CreditCardType;
-import demo.customer.Customer;
-import demo.customer.CustomerRepository;
-
-import java.util.HashSet;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = AccountApplication.class)
@@ -32,41 +30,35 @@ public class AccountApplicationTests extends TestCase {
 
     @Test
     public void customerTest() {
-
         log.info("*** Starting Customer Test");
 
         // Create a new account
-        Account account = new Account("12345", new HashSet<>(), new HashSet<>());
+        Account account = new Account("12345");
+
+        // Create a new customer for the account
+        Customer customer = new Customer("Jane", "Doe", "jane.doe@gmail.com", account);
 
         // Create a new credit card for the account
         CreditCard creditCard = new CreditCard("1234567801234567", CreditCardType.VISA);
 
-        // Add the credit card to the account
-        account.getCreditCards().add(creditCard);
-
-        // Create a new customer for the account
-        Customer customer = new Customer("Jane", "Doe", "jane.doe@gmail.com", account);
+        // Add the credit card to the customer's account
+        customer.getAccount()
+                .getCreditCards()
+                .add(creditCard);
 
         // Create a new shipping address for the customer
         Address address = new Address("1600 Pennsylvania Ave NW", null,
                 "DC", "Washington", "United States", AddressType.SHIPPING, 20500);
 
-        // Add address to customer
-        account.getAddresses().add(address);
+        // Add address to the customer's account
+        customer.getAccount()
+                .getAddresses()
+                .add(address);
 
-        log.info("Saving the Customer record to the CustomerRepository...");
-
-        // Save the customer object, cascading saves to the object graph
+        // Apply the cascading update by persisting the customer object
         customer = customerRepository.save(customer);
-
-        // Log out the state of the customer entity
-        log.info(customer.toString());
-
-        log.info("Getting the saved record from the CustomerRepository...");
 
         // Query for the customer object to ensure cascading persistence of the object graph
         log.info(customerRepository.findOne(customer.getId()).toString());
-
     }
-
 }

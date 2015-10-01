@@ -1,30 +1,28 @@
 package demo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+/**
+ * A simple domain class for a user.
+ *
+ * @author Kenny Bastani
+ * @author Josh Long
+ */
+public class User {
 
-@Entity
-public class User { //<1>
-
-    //<2>
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
 
-    // ... Getters omitted
-
     public User() {
     }
 
-    public User(Long id, String firstName, String lastName, String email) { //<4>
+    public User(Long id, String firstName, String lastName, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
 
-    @Id
     public Long getId() {
         return id;
     }

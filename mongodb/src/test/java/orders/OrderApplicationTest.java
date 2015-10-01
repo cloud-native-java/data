@@ -1,15 +1,11 @@
 package orders;
 
 import demo.OrderApplication;
-import junit.framework.TestCase;
 import demo.invoice.Invoice;
-import demo.order.Order;
-import demo.product.Product;
-import demo.shipment.Shipment;
 import demo.invoice.InvoiceRepository;
+import demo.order.Order;
 import demo.order.OrderRepository;
-import demo.product.ProductRepository;
-import demo.shipment.ShipmentRepository;
+import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -32,41 +28,15 @@ public class OrderApplicationTest extends TestCase {
     MongoTemplate mongoTemplate;
 
     @Autowired
-    ProductRepository productRepository;
-
-    @Autowired
     OrderRepository orderRepository;
 
     @Autowired
     InvoiceRepository invoiceRepository;
 
-    @Autowired
-    ShipmentRepository shipmentRepository;
-
     @Test
     public void orderTest() {
-        log.info("Creating a new product..");
-
-        // Create a new product
-        Product product = new Product("Fog Machine", "SKU-12345");
-
-        // Save the product
-        productRepository.save(product);
-
         // Create a new order
         Order order = new Order();
-
-        // Add fog machine to the new order
-        order.setProducts(new HashSet<>(Arrays.asList(new Product[]{product})));
-
-        // Create a new shipment
-        Shipment shipment = new Shipment();
-
-        // Save the shipment
-        shipmentRepository.save(shipment);
-
-        // Add the shipment to the order
-        order.setShipment(shipment);
 
         // Create a new invoice
         Invoice invoice = new Invoice();
@@ -83,16 +53,7 @@ public class OrderApplicationTest extends TestCase {
         // Log the result
         log.info(order.toString());
 
-        Product cloudFoundrySwag = new Product("Cloud Foundry Swag", "SKU-1765");
-
-        cloudFoundrySwag = productRepository.save(cloudFoundrySwag);
-
-        // Update the object
-        order.getProducts().add(cloudFoundrySwag);
-
         // The lastModified and createdAt timestamps should now be different
         log.info(orderRepository.save(order).toString());
     }
-
-
 }

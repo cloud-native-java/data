@@ -2,7 +2,6 @@ package demo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,13 +12,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Example Spring Data JDBC application for Cloud Native Java: Managing Data
+ *
+ * @author Kenny Bastani
+ * @author Josh Long
+ */
 @SpringBootApplication
 public class DemoApplication {
 
     private Logger log = LoggerFactory.getLogger(DemoApplication.class);
-
-    @Autowired
-    UserRepository userRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
@@ -32,7 +34,7 @@ public class DemoApplication {
 
             jdbcTemplate.execute("DROP TABLE user IF EXISTS");
             jdbcTemplate.execute("CREATE TABLE user(" +
-                    "id BIGINT PRIMARY KEY NOT NULL IDENTITY, " +
+                    "id serial, " +
                     "first_name VARCHAR(255), last_name VARCHAR(255), email VARCHAR(255))");
 
             // Split each supplied string into columns using the space symbol as a delimiter
@@ -63,11 +65,6 @@ public class DemoApplication {
                                     rs.getString("last_name"),
                                     rs.getString("email")))
                     .forEach(user -> log.info(user.toString()));
-
-            log.warn("Use a JPA Repository to query for all users that we just inserted with the JdbcTemplate");
-
-            // Now use the JPA-based UserRepository to query for data
-            userRepository.findAll().forEach(user -> log.info(user.toString()));
         };
     }
 }

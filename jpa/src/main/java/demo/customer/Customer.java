@@ -4,7 +4,6 @@ import demo.account.Account;
 import demo.data.BaseEntity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * The {@link Customer} entity is a root object in the customer bounded context.
@@ -13,7 +12,7 @@ import java.io.Serializable;
  * @author Josh Long
  */
 @Entity
-public class Customer extends BaseEntity implements Serializable {
+public class Customer extends BaseEntity {
 
     private Long id;
     private String firstName;
@@ -82,6 +81,6 @@ public class Customer extends BaseEntity implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", account=" + account +
-                '}';
+                "} " + super.toString();
     }
 }

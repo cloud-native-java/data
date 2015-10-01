@@ -6,6 +6,7 @@ import demo.customer.Customer;
 import demo.data.BaseEntity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -25,10 +26,10 @@ public class Account extends BaseEntity {
     public Account() {
     }
 
-    public Account(String accountNumber, Set<CreditCard> creditCards, Set<Address> addresses) {
+    public Account(String accountNumber) {
         this.accountNumber = accountNumber;
-        this.creditCards = creditCards;
-        this.addresses = addresses;
+        this.creditCards = new HashSet<>();
+        this.addresses = new HashSet<>();
     }
 
     @Id

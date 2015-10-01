@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 public class CreditCard extends BaseEntity {
 
-    Long id;
+    private Long id;
     private String number;
 
     @Enumerated(EnumType.STRING)
