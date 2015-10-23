@@ -14,14 +14,16 @@ public class Product {
 
     @GraphId
     private Long id;
-    private String name, sku;
+    private String name, productId;
+    private Double unitPrice;
 
     public Product() {
     }
 
-    public Product(String name, String sku) {
+    public Product(String name, String productId, Double unitPrice) {
         this.name = name;
-        this.sku = sku;
+        this.productId = productId;
+        this.unitPrice = unitPrice;
     }
 
     public Long getId() {
@@ -40,20 +42,29 @@ public class Product {
         this.name = name;
     }
 
-    public String getSku() {
-        return sku;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setSku(String sku) {
-        this.sku = sku;
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public Double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(Double unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
-                ", sku='" + sku + '\'' +
-                "} " + super.toString();
+                ", productId='" + productId + '\'' +
+                ", unitPrice=" + unitPrice +
+                '}';
     }
 }

@@ -38,7 +38,8 @@ public class GraphConfiguration extends Neo4jConfiguration {
 
     @Bean
     public SessionFactory getSessionFactory() {
-        return new SessionFactory("demo.product", "demo.shipment", "demo.warehouse");
+        return new SessionFactory("demo.product", "demo.shipment", "demo.warehouse",
+                "demo.address", "demo.inventory", "demo.catalog");
     }
 
     @Bean
