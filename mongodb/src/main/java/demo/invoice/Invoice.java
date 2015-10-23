@@ -19,13 +19,13 @@ import java.util.List;
 @Document
 public class Invoice extends BaseEntity {
 
-    private String invoiceId, accountNumber;
+    private String invoiceId, customerId;
     private List<Order> orders = new ArrayList<Order>();
     private Address billingAddress;
     private InvoiceStatus invoiceStatus;
 
-    public Invoice(String accountNumber, Address billingAddress) {
-        this.accountNumber = accountNumber;
+    public Invoice(String customerId, Address billingAddress) {
+        this.customerId = customerId;
         this.billingAddress = billingAddress;
         this.billingAddress.setAddressType(AddressType.BILLING);
         this.invoiceStatus = InvoiceStatus.CREATED;
@@ -52,12 +52,12 @@ public class Invoice extends BaseEntity {
         orders.add(order);
     }
 
-    public String getAccountNumber() {
-        return accountNumber;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public Address getBillingAddress() {
@@ -80,7 +80,7 @@ public class Invoice extends BaseEntity {
     public String toString() {
         return "Invoice{" +
                 "invoiceId='" + invoiceId + '\'' +
-                ", accountNumber='" + accountNumber + '\'' +
+                ", customerId='" + customerId + '\'' +
                 ", orders=" + orders +
                 ", billingAddress=" + billingAddress +
                 ", invoiceStatus=" + invoiceStatus +
