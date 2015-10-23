@@ -3,8 +3,10 @@ package orders;
 import demo.OrderApplication;
 import demo.invoice.Invoice;
 import demo.invoice.InvoiceRepository;
+import demo.order.LineItem;
 import demo.order.Order;
 import demo.order.OrderRepository;
+import demo.order.ShippingAddress;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,8 +17,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = OrderApplication.class)
@@ -36,16 +37,20 @@ public class OrderApplicationTest extends TestCase {
     @Test
     public void orderTest() {
         // Create a new order
-        Order order = new Order();
+        Order order = new Order("12345");
 
-        // Create a new invoice
-        Invoice invoice = new Invoice();
+        // Create a new shipping address for the customer
+        ShippingAddress shippingAddress = new ShippingAddress("1600 Pennsylvania Ave NW", null,
+                "DC", "Washington", "United States", 20500);
 
-        // Save the invoice
-        invoice = invoiceRepository.save(invoice);
+        // Set the shipping address for the order
+        order.setShippingAddress(shippingAddress);
 
-        // Add the order to the invoice
-        invoice.setOrders(new HashSet<>(Arrays.asList(new Order[]{order})));
+        // Add line items
+        order.addLineItem(new LineItem("Best. Cloud. Ever. (T-Shirt, Men's Large)", "SKU-24642", 1, 21.99, .06));
+        order.addLineItem(new LineItem("Like a BOSH (T-Shirt, Women's Medium)", "SKU-34563", 3, 14.99, .06));
+        order.addLineItem(new LineItem("We're gonna need a bigger VM (T-Shirt, Women's Small)", "SKU-12464", 4, 13.99, .06));
+        order.addLineItem(new LineItem("cf push awesome (Hoodie, Men's Medium)", "SKU-64233", 2, 21.99, .06));
 
         // Save the order
         order = orderRepository.save(order);
@@ -55,5 +60,21 @@ public class OrderApplicationTest extends TestCase {
 
         // The lastModified and createdAt timestamps should now be different
         log.info(orderRepository.save(order).toString());
+
+        // Create a new invoice
+        Invoice invoice = new Invoice(order.getAccountNumber());
+
+        // Add the order to the invoice
+        invoice.addOrder(order);
+
+        // Save the invoice
+        invoice = invoiceRepository.save(invoice);
+
+        log.info(invoice.toString());
+
+        // Lookup orders by account number
+        List<Order> orders = orderRepository.findByAccountNumber("12345");
+
+        log.info(orders.toString());
     }
 }

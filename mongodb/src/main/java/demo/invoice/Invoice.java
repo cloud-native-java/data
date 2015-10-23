@@ -4,7 +4,8 @@ import demo.domain.BaseEntity;
 import demo.order.Order;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple domain class for the {@link Invoice} concept of the order context.
@@ -16,7 +17,12 @@ import java.util.Set;
 public class Invoice extends BaseEntity {
 
     private String id;
-    private Set<Order> orders;
+    private List<Order> orders = new ArrayList<Order>();
+    private String accountNumber;
+
+    public Invoice(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
 
     public String getId() {
         return id;
@@ -26,12 +32,16 @@ public class Invoice extends BaseEntity {
         this.id = id;
     }
 
-    public Set<Order> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
     }
 
     @Override
@@ -39,6 +49,7 @@ public class Invoice extends BaseEntity {
         return "Invoice{" +
                 "id='" + id + '\'' +
                 ", orders=" + orders +
+                ", accountNumber='" + accountNumber + '\'' +
                 "} " + super.toString();
     }
 }

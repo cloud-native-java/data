@@ -12,10 +12,10 @@ public class BeforeSaveListener extends AbstractMongoEventListener<BaseEntity> {
     @Override
     public void onBeforeSave(BeforeSaveEvent<BaseEntity> event) {
 
-        Long timestamp = new DateTime().getMillis();
+        DateTime timestamp = new DateTime();
 
         // Add a timestamp to the created date if it does not yet exist
-        if(event.getSource().getCreatedAt() == null)
+        if (event.getSource().getCreatedAt() == null)
             event.getSource().setCreatedAt(timestamp);
 
         // Update the timestamp to the current time

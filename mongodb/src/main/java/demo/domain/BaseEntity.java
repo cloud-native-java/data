@@ -1,5 +1,7 @@
 package demo.domain;
 
+import org.joda.time.DateTime;
+
 /**
  * An abstract base class that is inherited by other domain classes
  * in the order application context.
@@ -9,21 +11,21 @@ package demo.domain;
  */
 public class BaseEntity {
 
-    private Long lastModified, createdAt;
+    private DateTime lastModified, createdAt;
 
-    public Long getLastModified() {
+    public DateTime getLastModified() {
         return lastModified;
     }
 
-    public void setLastModified(Long lastModified) {
+    public void setLastModified(DateTime lastModified) {
         this.lastModified = lastModified;
     }
 
-    public Long getCreatedAt() {
+    public DateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Long createdAt) {
+    public void setCreatedAt(DateTime createdAt) {
         this.createdAt = createdAt;
     }
 

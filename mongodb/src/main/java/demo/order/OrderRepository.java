@@ -2,6 +2,8 @@ package demo.order;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface OrderRepository extends PagingAndSortingRepository<Order, String> {
+import java.util.List;
 
+public interface OrderRepository extends PagingAndSortingRepository<Order, String> {
+    List<Order> findByAccountNumber(String accountNumber);
 }
