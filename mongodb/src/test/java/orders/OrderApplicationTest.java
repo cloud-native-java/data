@@ -1,13 +1,15 @@
 package orders;
 
 import demo.OrderApplication;
+import demo.address.Address;
 import demo.invoice.Invoice;
 import demo.invoice.InvoiceRepository;
 import demo.order.LineItem;
 import demo.order.Order;
 import demo.order.OrderRepository;
-import demo.order.ShippingAddress;
 import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -34,17 +36,21 @@ public class OrderApplicationTest extends TestCase {
     @Autowired
     InvoiceRepository invoiceRepository;
 
+    @Before
+    public void before() {
+        orderRepository.deleteAll();
+        invoiceRepository.deleteAll();
+    }
+
     @Test
     public void orderTest() {
-        // Create a new order
-        Order order = new Order("12345");
 
         // Create a new shipping address for the customer
-        ShippingAddress shippingAddress = new ShippingAddress("1600 Pennsylvania Ave NW", null,
+        Address address = new Address("1600 Pennsylvania Ave NW", null,
                 "DC", "Washington", "United States", 20500);
 
-        // Set the shipping address for the order
-        order.setShippingAddress(shippingAddress);
+        // Create a new order
+        Order order = new Order("12345", address);
 
         // Add line items
         order.addLineItem(new LineItem("Best. Cloud. Ever. (T-Shirt, Men's Large)", "SKU-24642", 1, 21.99, .06));
@@ -62,7 +68,7 @@ public class OrderApplicationTest extends TestCase {
         log.info(orderRepository.save(order).toString());
 
         // Create a new invoice
-        Invoice invoice = new Invoice(order.getAccountNumber());
+        Invoice invoice = new Invoice(order.getAccountNumber(), address);
 
         // Add the order to the invoice
         invoice.addOrder(order);
@@ -70,11 +76,15 @@ public class OrderApplicationTest extends TestCase {
         // Save the invoice
         invoice = invoiceRepository.save(invoice);
 
-        log.info(invoice.toString());
-
         // Lookup orders by account number
         List<Order> orders = orderRepository.findByAccountNumber("12345");
 
         log.info(orders.toString());
+    }
+
+    @After
+    public void tearDown() {
+        orderRepository.deleteAll();
+        invoiceRepository.deleteAll();
     }
 }

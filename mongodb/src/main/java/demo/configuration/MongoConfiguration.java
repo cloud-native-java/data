@@ -28,7 +28,7 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
 
     @Override
     public String getDatabaseName() {
-        return "database";
+        return "orders";
     }
 
     @Override

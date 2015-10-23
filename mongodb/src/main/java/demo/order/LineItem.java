@@ -8,13 +8,14 @@ package demo.order;
  */
 public class LineItem {
 
-    private String name, sku;
+    private String name, productId;
     private Integer quantity;
     private Double price, tax;
 
-    public LineItem(String name, String sku, Integer quantity, Double price, Double tax) {
+    public LineItem(String name, String productId, Integer quantity,
+                    Double price, Double tax) {
         this.name = name;
-        this.sku = sku;
+        this.productId = productId;
         this.quantity = quantity;
         this.price = price;
         this.tax = tax;
@@ -28,12 +29,12 @@ public class LineItem {
         this.name = name;
     }
 
-    public String getSku() {
-        return sku;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setSku(String sku) {
-        this.sku = sku;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public Integer getQuantity() {
@@ -64,7 +65,7 @@ public class LineItem {
     public String toString() {
         return "LineItem{" +
                 "name='" + name + '\'' +
-                ", sku='" + sku + '\'' +
+                ", productId='" + productId + '\'' +
                 ", quantity=" + quantity +
                 ", price=" + price +
                 ", tax=" + tax +

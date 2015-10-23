@@ -1,22 +1,19 @@
-package demo.order;
+package demo.address;
 
 /**
- * A simple {@link ShippingAddress} entity for an order.
+ * A simple {@link Address} entity for an order or invoice.
  *
  * @author Kenny Bastani
  * @author Josh Long
  */
-public class ShippingAddress {
+public class Address {
 
-    private String street1;
-    private String street2;
-    private String state;
-    private String city;
-    private String country;
+    private String street1, street2, state, city, country;
     private Integer zipCode;
+    private AddressType addressType;
 
-    public ShippingAddress(String street1, String street2, String state,
-                           String city, String country, Integer zipCode) {
+    public Address(String street1, String street2, String state,
+                   String city, String country, Integer zipCode) {
         this.street1 = street1;
         this.street2 = street2;
         this.state = state;
@@ -73,15 +70,24 @@ public class ShippingAddress {
         this.zipCode = zipCode;
     }
 
+    public AddressType getAddressType() {
+        return addressType;
+    }
+
+    public void setAddressType(AddressType addressType) {
+        this.addressType = addressType;
+    }
+
     @Override
     public String toString() {
-        return "ShippingAddress{" +
+        return "Address{" +
                 "street1='" + street1 + '\'' +
                 ", street2='" + street2 + '\'' +
                 ", state='" + state + '\'' +
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +
                 ", zipCode=" + zipCode +
+                ", addressType=" + addressType +
                 '}';
     }
 }

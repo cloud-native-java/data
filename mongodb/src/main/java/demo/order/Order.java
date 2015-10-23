@@ -1,6 +1,9 @@
 package demo.order;
 
+import demo.address.Address;
+import demo.address.AddressType;
 import demo.domain.BaseEntity;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -15,21 +18,26 @@ import java.util.List;
 @Document
 public class Order extends BaseEntity {
 
-    private String id;
+    private String orderId;
     private String accountNumber;
+    private OrderStatus orderStatus;
     private List<LineItem> lineItems = new ArrayList<>();
-    private ShippingAddress shippingAddress;
+    private Address shippingAddress;
 
-    public Order(String accountNumber) {
+    public Order(String accountNumber, Address shippingAddress) {
         this.accountNumber = accountNumber;
+        this.shippingAddress = shippingAddress;
+        this.shippingAddress.setAddressType(AddressType.SHIPPING);
+        this.orderStatus = OrderStatus.PENDING;
     }
 
-    public String getId() {
-        return id;
+    @Id
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setOrderId(String id) {
+        this.orderId = orderId;
     }
 
     public String getAccountNumber() {
@@ -40,6 +48,14 @@ public class Order extends BaseEntity {
         this.accountNumber = accountNumber;
     }
 
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
     public List<LineItem> getLineItems() {
         return lineItems;
     }
@@ -48,11 +64,11 @@ public class Order extends BaseEntity {
         this.lineItems = lineItems;
     }
 
-    public ShippingAddress getShippingAddress() {
+    public Address getShippingAddress() {
         return shippingAddress;
     }
 
-    public void setShippingAddress(ShippingAddress shippingAddress) {
+    public void setShippingAddress(Address shippingAddress) {
         this.shippingAddress = shippingAddress;
     }
 
@@ -63,8 +79,9 @@ public class Order extends BaseEntity {
     @Override
     public String toString() {
         return "Order{" +
-                "id='" + id + '\'' +
+                "orderId='" + orderId + '\'' +
                 ", accountNumber='" + accountNumber + '\'' +
+                ", orderStatus=" + orderStatus +
                 ", lineItems=" + lineItems +
                 ", shippingAddress=" + shippingAddress +
                 "} " + super.toString();
