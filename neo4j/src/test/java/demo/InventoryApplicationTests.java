@@ -28,6 +28,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = InventoryApplication.class)
 public class InventoryApplicationTests {
@@ -76,15 +80,28 @@ public class InventoryApplicationTests {
                 new Product("Best. Cloud. Ever. (T-Shirt, Men's Large)", "SKU-24642", 21.99),
                 new Product("Like a BOSH (T-Shirt, Women's Medium)", "SKU-34563", 14.99),
                 new Product("We're gonna need a bigger VM (T-Shirt, Women's Small)", "SKU-12464", 13.99),
-                new Product("cf push awesome (Hoodie, Men's Medium)", "SKU-64233", 21.99)).stream().collect(Collectors.toList());
+                new Product("cf push awesome (Hoodie, Men's Medium)", "SKU-64233", 21.99))
+                .stream()
+                .collect(Collectors.toList());
 
         productRepository.save(products);
+
+        Product product1 = productRepository.findOne(products.get(0).getId());
+
+        assertThat(product1, is(notNullValue()));
+        assertThat(product1.getName(), is(products.get(0).getName()));
+        assertThat(product1.getUnitPrice(), is(products.get(0).getUnitPrice()));
 
         Catalog catalog = new Catalog("Fall Catalog");
 
         catalog.getProducts().addAll(products);
 
-        catalog = catalogRepository.save(catalog);
+        catalogRepository.save(catalog);
+
+        Catalog catalog1 = catalogRepository.findOne(catalog.getId());
+
+        assertThat(catalog1, is(notNullValue()));
+        assertThat(catalog1.getName(), is(catalog.getName()));
 
         Address warehouseAddress = new Address("875 Howard St", null,
                 "CA", "San Francisco", "United States", 94103);
@@ -95,15 +112,30 @@ public class InventoryApplicationTests {
         // Save the addresses
         addressRepository.save(Arrays.asList(warehouseAddress, shipToAddress));
 
+        Address address1 = addressRepository.findOne(shipToAddress.getId());
+
+        assertThat(address1, is(notNullValue()));
+        assertThat(address1.toString(), is(shipToAddress.toString()));
+
+        Address address2 = addressRepository.findOne(warehouseAddress.getId());
+
+        assertThat(address2, is(notNullValue()));
+        assertThat(address2.toString(), is(warehouseAddress.toString()));
+
         log.info(warehouseAddress.toString());
         log.info(shipToAddress.toString());
 
         warehouse.setAddress(warehouseAddress);
         warehouse = warehouseRepository.save(warehouse);
+
+        Warehouse warehouse1 = warehouseRepository.findOne(warehouse.getId());
+
+        assertThat(warehouse1, is(notNullValue()));
+        assertThat(warehouse1.toString(), is(warehouse.toString()));
+
         log.info(warehouse.toString());
 
         final Warehouse finalWarehouse = warehouse;
-
 
         // Create a new set of inventories with a randomized inventory number
         Set<Inventory> inventories = products.stream()
@@ -114,8 +146,15 @@ public class InventoryApplicationTests {
 
         inventoryRepository.save(inventories);
 
-        Shipment shipment = new Shipment(inventories, shipToAddress, warehouse, ShipmentStatus.SHIPPED);
+        Shipment shipment = new Shipment(inventories, shipToAddress,
+                warehouse, ShipmentStatus.SHIPPED);
+
         shipmentRepository.save(shipment);
+
+        Shipment shipment1 = shipmentRepository.findOne(shipment.getId());
+
+        assertThat(shipment1, is(notNullValue()));
+        assertThat(shipment1.toString(), is(shipment.toString()));
     }
 
 }

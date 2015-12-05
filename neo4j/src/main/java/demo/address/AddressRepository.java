@@ -1,6 +1,6 @@
 package demo.address;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.neo4j.repository.GraphRepository;
 
-public interface AddressRepository extends PagingAndSortingRepository<Address, String> {
+public interface AddressRepository extends GraphRepository<Address> {
 }

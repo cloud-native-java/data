@@ -1,6 +1,6 @@
 package demo.catalog;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.neo4j.repository.GraphRepository;
 
-public interface CatalogRepository extends PagingAndSortingRepository<Catalog, String> {
+public interface CatalogRepository extends GraphRepository<Catalog> {
 }

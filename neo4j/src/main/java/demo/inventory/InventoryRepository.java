@@ -1,6 +1,6 @@
 package demo.inventory;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.neo4j.repository.GraphRepository;
 
-public interface InventoryRepository extends PagingAndSortingRepository<Inventory, String> {
+public interface InventoryRepository extends GraphRepository<Inventory> {
 }

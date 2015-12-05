@@ -43,6 +43,10 @@ public class Shipment {
         this.shipmentStatus = shipmentStatus;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public Set<Inventory> getInventories() {
         return inventories;
     }
