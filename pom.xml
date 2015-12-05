@@ -15,7 +15,6 @@
     <modules>
         <module>jdbc</module>
         <module>jpa</module>
-        <module>redis</module>
         <module>mongodb</module>
         <module>neo4j</module>
     </modules>
