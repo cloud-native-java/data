@@ -18,4 +18,4 @@ cf s | grep $cs && cf ds -f $cs
 deploy_app $cs
 deploy_service $cs
 deploy_app configuration-client
-
+ 
