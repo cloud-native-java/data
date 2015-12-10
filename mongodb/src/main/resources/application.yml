@@ -1,5 +1,1 @@
-spring:
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
+spring.data.mongodb.uri: "localhost"

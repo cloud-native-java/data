@@ -2,6 +2,7 @@ package demo.configuration;
 
 import com.mongodb.Mongo;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -21,9 +22,12 @@ import java.util.List;
 @Configuration
 public class MongoConfiguration extends AbstractMongoConfiguration {
 
+    @Value("${spring.data.mongodb.uri}")
+    private String uri;
+
     @Bean
     public Mongo mongo() throws Exception {
-        return new Mongo("localhost");
+        return new Mongo(uri);
     }
 
     @Override
