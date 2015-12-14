@@ -65,7 +65,8 @@ public class InventoryApplicationTests {
     public void setup() {
         try {
             neo4jConfiguration.getSession().query(
-                    "MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r;", new HashMap<>()).queryResults();
+                    "MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r;", new HashMap<>())
+                        .queryResults();
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Neo4j isn't running or this test can't connect to it!");
