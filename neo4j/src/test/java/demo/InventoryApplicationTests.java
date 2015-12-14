@@ -34,8 +34,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = {
-        Neo4jConfiguration.class, InventoryApplication.class})
+@SpringApplicationConfiguration(classes = { InventoryApplication.class})
 public class InventoryApplicationTests {
 
     private Logger log = LoggerFactory.getLogger(InventoryApplicationTests.class);
