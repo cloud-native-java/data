@@ -14,6 +14,7 @@ import demo.shipment.ShipmentRepository;
 import demo.shipment.ShipmentStatus;
 import demo.warehouse.Warehouse;
 import demo.warehouse.WarehouseRepository;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +34,8 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = InventoryApplication.class)
+@SpringApplicationConfiguration(classes = {
+        Neo4jConfiguration.class, InventoryApplication.class})
 public class InventoryApplicationTests {
 
     private Logger log = LoggerFactory.getLogger(InventoryApplicationTests.class);
@@ -59,16 +61,14 @@ public class InventoryApplicationTests {
     @Autowired
     private Neo4jConfiguration neo4jConfiguration;
 
-    @Test
-    public void contextLoads() {
-    }
-
     @Before
     public void setup() {
         try {
-            neo4jConfiguration.getSession().query("MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r;", new HashMap<>()).queryResults();
+            neo4jConfiguration.getSession().query(
+                    "MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r;", new HashMap<>()).queryResults();
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.fail("Neo4j isn't running or this test can't connect to it!");
         }
     }
 
@@ -135,7 +135,7 @@ public class InventoryApplicationTests {
 
         log.info(warehouse.toString());
 
-        final Warehouse finalWarehouse = warehouse;
+        Warehouse finalWarehouse = warehouse;
 
         // Create a new set of inventories with a randomized inventory number
         Set<Inventory> inventories = products.stream()
