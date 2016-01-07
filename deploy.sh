@@ -2,20 +2,10 @@
 
 set -e
 
-source ./build/utils/cf-common.sh
+source $BUILD_DIRECTORY/utils/cf-common.sh
 
-as=account-service
-os=order-service
-is=inventory-service
-rb=rabbitmq-bus
+# Create an AWS for docker compost
+sh $BUILD_DIRECTORY/docker-aws.sh create
 
-cf s | grep $rb || cf cs cloudamqp lemur $rb
-
-cf d -f configuration-client
-cf d -f $cs
-cf s | grep $cs && cf ds -f $cs
-
-deploy_app $cs
-deploy_service $cs
-deploy_app configuration-client
-
+# Source the environment variables for the integration testing containers
+source $BUILD_DIRECTORY/utils/docker-aws.sh

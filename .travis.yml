@@ -1,8 +1,20 @@
 language: java
 
+sudo: required
+
+services:
+  - docker
+
 jdk:
   - oraclejdk8
 
 cache:
   directories:
     - $HOME/.m2/repository/
+
+install:
+  - git clone https://github.com/cloud-native-java/build.git
+  - ./build/install.sh $CF_USER $CF_PASSWORD $CF_ORG $CF_SPACE
+
+script:
+  - ./build/script.sh $CF_USER $CF_PASSWORD $CF_ORG $CF_SPACE --docker-aws
