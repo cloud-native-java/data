@@ -1,7 +1,9 @@
 package demo.configuration;
 
 import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -21,9 +23,15 @@ import java.util.List;
 @Configuration
 public class MongoConfiguration extends AbstractMongoConfiguration {
 
+    @Value("${spring.data.mongodb.host}")
+    private String host;
+
+    @Value("${spring.data.mongodb.port}")
+    private Integer port;
+
     @Bean
     public Mongo mongo() throws Exception {
-        return new Mongo("localhost");
+        return new MongoClient(host, port);
     }
 
     @Override
