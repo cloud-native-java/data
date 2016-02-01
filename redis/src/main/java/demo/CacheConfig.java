@@ -15,14 +15,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 @EnableCaching
 public class CacheConfig extends CachingConfigurerSupport {
 
-    @Value("${spring.redis.host}")
-    private String redisHost;
-
-    @Value("${spring.redis.port}")
-    private Integer redisPort;
-
     @Bean
-    public JedisConnectionFactory redisConnectionFactory() {
+    public JedisConnectionFactory redisConnectionFactory(
+            @Value("${spring.redis.port}") Integer redisPort,
+            @Value("${spring.redis.host}") String redisHost) {
         JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();
 
         // Load connection from configuration profile
