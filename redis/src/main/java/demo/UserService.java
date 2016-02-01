@@ -1,16 +1,19 @@
-package demo.user;
+package demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-class UserServiceImpl implements UserService {
+public class UserService {
 
     private RedisTemplate<String, User> redisTemplate;
 
     @Autowired
-    public UserServiceImpl(RedisTemplate redisTemplate) {
+    public UserService(RedisTemplate redisTemplate) {
         this.redisTemplate = (RedisTemplate<String, User>) redisTemplate;
     }
 
@@ -20,6 +23,7 @@ class UserServiceImpl implements UserService {
      * @param user is the new {@link User} you want to create
      * @return the user that was created
      */
+    @CacheEvict(value = "user", key = "#user.getUserId()")
     public User createUser(User user) {
 
         User result = null;
@@ -40,6 +44,7 @@ class UserServiceImpl implements UserService {
      * @param id is the identifier of the user you want to retrieve
      * @return the desired {@link User} or null if no user with the ID exists
      */
+    @Cacheable(value = "user")
     public User getUser(String id) {
         return this.redisTemplate.opsForValue()
                 .get(getFieldKey(id));
@@ -51,6 +56,7 @@ class UserServiceImpl implements UserService {
      * @param user is the {@link User} you would like to update
      * @return the updated {@link User}
      */
+    @CachePut(value = "user", key = "#id")
     public User updateUser(String id, User user) {
         if(userExists(user.getUserId())) {
             this.redisTemplate.opsForValue()
@@ -66,6 +72,7 @@ class UserServiceImpl implements UserService {
      * @param id is the identifier of the {@link User} to delete
      * @return true if the user was deleted
      */
+    @CacheEvict(value = "user", key = "#id")
     public boolean deleteUser(String id) {
 
         boolean deleted = false;

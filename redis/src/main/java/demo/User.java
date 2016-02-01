@@ -1,4 +1,4 @@
-package demo.user;
+package demo;
 
 import java.io.Serializable;
 import java.util.UUID;

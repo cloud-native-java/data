@@ -1,4 +1,4 @@
-package demo.config;
+package demo;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
