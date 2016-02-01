@@ -21,7 +21,6 @@ public class CacheConfig extends CachingConfigurerSupport {
             @Value("${spring.redis.host}") String redisHost) {
         JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();
 
-        // Load connection from configuration profile
         redisConnectionFactory.setHostName(redisHost);
         redisConnectionFactory.setPort(redisPort);
 
