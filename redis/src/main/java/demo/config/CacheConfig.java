@@ -45,12 +45,4 @@ public class CacheConfig extends CachingConfigurerSupport {
         cacheManager.setDefaultExpiration(3000);
         return cacheManager;
     }
-
-//    @Bean
-//    public KeyGenerator keyGenerator() {
-//        return (o, method, objects) -> o.getClass().getName() + method.getName() + Arrays.asList(objects)
-//                .stream()
-//                .map(Object::toString)
-//                .collect(Collectors.joining());
-//    }
 }
