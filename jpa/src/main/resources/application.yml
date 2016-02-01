@@ -8,7 +8,7 @@ spring:
     show_sql: false
     database: MYSQL
     generate-ddl: true
-  datasource: 
+  datasource:
     url: jdbc:mysql://192.168.99.100:3306/dev
     username: root
     password: dbpass
@@ -19,4 +19,4 @@ spring:
     show_sql: false
     database: H2
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
