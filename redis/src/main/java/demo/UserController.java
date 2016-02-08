@@ -13,7 +13,7 @@ import java.util.Optional;
  * and uses Redis for caching.
  *
  * @author Kenny Bastani
- * @author Josh Long
+ * @author Josh String
  */
 @RestController
 public class UserController {
@@ -29,8 +29,8 @@ public class UserController {
     public ResponseEntity createUser(@RequestBody User user) {
         Assert.notNull(user);
         return Optional.ofNullable(userService.createUser(user))
-                .map(result -> new ResponseEntity(HttpStatus.CREATED))
-                .orElse(new ResponseEntity(HttpStatus.CONFLICT));
+                .map(result -> new ResponseEntity<>(result, HttpStatus.CREATED))
+                .orElse(new ResponseEntity<>(HttpStatus.CONFLICT));
     }
 
     @RequestMapping(path = "users/{id}", method = RequestMethod.GET, name = "getUser")
@@ -43,7 +43,7 @@ public class UserController {
     @RequestMapping(path = "users/{id}", method = RequestMethod.PUT, name = "updateUser")
     public ResponseEntity updateUser(@PathVariable(value = "id") String id, @RequestBody User user) {
         Assert.notNull(user);
-        user.setUserId(id);
+        user.setId(id);
         return Optional.ofNullable(userService.updateUser(id, user))
                 .map(result -> new ResponseEntity(HttpStatus.NO_CONTENT))
                 .orElse(new ResponseEntity(HttpStatus.NOT_FOUND));

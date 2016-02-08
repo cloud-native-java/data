@@ -15,8 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.Arrays;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,6 +29,9 @@ public class RedisApplicationTests {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -50,25 +51,20 @@ public class RedisApplicationTests {
 
     private void cleanUp() {
         // Make sure that test records do not yet exist
-        Arrays.asList(
-                "test_create_jane_doe",
-                "test_get_john_doe",
-                "test_update_johnny_appleseed",
-                "test_delete_sally_ride")
-                .forEach(id -> userService.deleteUser(id));
+        userRepository.deleteAll();
     }
 
     @Test
     public void testCreateUser() throws Exception {
         // Setup test data
         User expectedUser = new User("Jane", "Doe");
-        expectedUser.setUserId("test_create_jane_doe");
 
         // Test create user success
-        this.mvc.perform(post("/users")
+        User actualUser = objectMapper.readValue(this.mvc.perform(post("/users")
                 .content(objectMapper.writeValueAsString(expectedUser))
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andReturn().getResponse().getContentAsString(), User.class);
 
         // Test create user conflict
         this.mvc.perform(post("/users")
@@ -77,48 +73,46 @@ public class RedisApplicationTests {
                 .andExpect(status().isConflict());
 
         // Clean up
-        userService.deleteUser(expectedUser.getUserId());
+        userService.deleteUser(actualUser.getId());
     }
 
     @Test
     public void testGetUser() throws Exception {
         // Setup test data
         User expectedUser = new User("John", "Doe");
-        expectedUser.setUserId("test_get_john_doe");
 
-        userService.createUser(expectedUser);
+        expectedUser = userService.createUser(expectedUser);
 
         // Test get user success
-        this.mvc.perform(get("/users/{id}", expectedUser.getUserId()))
+        this.mvc.perform(get("/users/{id}", expectedUser.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(objectMapper.writeValueAsString(expectedUser)));
 
         // Delete user
-        userService.deleteUser(expectedUser.getUserId());
+        userService.deleteUser(expectedUser.getId());
 
         // Test get user not found
-        this.mvc.perform(get("/users/{id}", expectedUser.getUserId()))
+        this.mvc.perform(get("/users/{id}", expectedUser.getId()))
                 .andExpect(status().isNotFound());
 
         // Clean up
-        userService.deleteUser(expectedUser.getUserId());
+        userService.deleteUser(expectedUser.getId());
     }
 
     @Test
     public void testUpdateUser() throws Exception {
         // Setup test data
         User expectedUser = new User("Johnny", "Appleseed");
-        expectedUser.setUserId("test_update_johnny_appleseed");
 
         // Test get user not found
-        this.mvc.perform(get("/users/{id}", expectedUser.getUserId()))
+        this.mvc.perform(get("/users/{id}", expectedUser.getId()))
                 .andExpect(status().isNotFound());
 
         // Test re-create user for cache invalidation
-        userService.createUser(expectedUser);
+        expectedUser = userService.createUser(expectedUser);
 
-        this.mvc.perform(get("/users/{id}", expectedUser.getUserId()))
+        this.mvc.perform(get("/users/{id}", expectedUser.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(objectMapper.writeValueAsString(expectedUser)));
@@ -127,40 +121,39 @@ public class RedisApplicationTests {
         expectedUser.setFirstName("John");
 
         // Test update user for cache invalidation
-        this.mvc.perform(put("/users/{id}", expectedUser.getUserId())
+        this.mvc.perform(put("/users/{id}", expectedUser.getId())
                 .content(objectMapper.writeValueAsString(expectedUser))
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isNoContent());
 
         // Test that user was updated
-        this.mvc.perform(get("/users/{id}", expectedUser.getUserId()))
+        this.mvc.perform(get("/users/{id}", expectedUser.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(objectMapper.writeValueAsString(expectedUser)));
 
         // Clean up
-        userService.deleteUser(expectedUser.getUserId());
+        userService.deleteUser(expectedUser.getId());
     }
 
     @Test
     public void testDeleteUser() throws Exception {
         // Setup test data
         User expectedUser = new User("Sally", "Ride");
-        expectedUser.setUserId("test_delete_sally_ride");
-        userService.createUser(expectedUser);
+        expectedUser = userService.createUser(expectedUser);
 
         // Test getting the user to put into cache
-        this.mvc.perform(get("/users/{id}", expectedUser.getUserId()))
+        this.mvc.perform(get("/users/{id}", expectedUser.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(objectMapper.writeValueAsString(expectedUser)));
 
         // Delete the user and remove from cache
-        this.mvc.perform(delete("/users/{id}", expectedUser.getUserId()))
+        this.mvc.perform(delete("/users/{id}", expectedUser.getId()))
                 .andExpect(status().isNoContent());
 
         // Test get user not found
-        this.mvc.perform(get("/users/{id}", expectedUser.getUserId()))
+        this.mvc.perform(get("/users/{id}", expectedUser.getId()))
                 .andExpect(status().isNotFound());
     }
 }

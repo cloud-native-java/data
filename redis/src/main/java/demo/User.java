@@ -1,5 +1,7 @@
 package demo;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -9,28 +11,30 @@ import java.util.UUID;
  * @author Kenny Bastani
  * @author Josh Long
  */
+@Entity
 public class User implements Serializable {
 
-    private String userId;
+    @Id
+    private String id;
     private String firstName;
     private String lastName;
 
     public User() {
-        userId = UUID.randomUUID().toString();
+        id = UUID.randomUUID().toString();
     }
 
     public User(String firstName, String lastName) {
-        userId = UUID.randomUUID().toString();
+        id = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getId() {
+        return id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -52,7 +56,7 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-                "userId='" + userId + '\'' +
+                "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
