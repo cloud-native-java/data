@@ -2,13 +2,15 @@ package demo;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -21,41 +23,39 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@SpringApplicationConfiguration(RedisApplication.class)
-public class RedisApplicationTests {
+@SpringApplicationConfiguration(UserServiceApplication.class)
+@ActiveProfiles(profiles = "test")
+public class UserServiceApplicationTests {
 
     @Autowired
     private WebApplicationContext context;
-
     @Autowired
     private UserService userService;
-
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private ObjectMapper objectMapper;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     private MockMvc mvc;
 
     @Before
     public void setUp() {
         this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
-        cleanUp();
+        flush();
     }
 
-    @After
-    public void tearDown() {
-        cleanUp();
-    }
-
-    private void cleanUp() {
-        // Make sure that test records do not yet exist
+    private void flush() {
+        redisTemplate.execute((RedisConnection connection) -> {
+            connection.flushDb();
+            return "OK";
+        });
         userRepository.deleteAll();
     }
 
     @Test
-    public void testCreateUser() throws Exception {
+    public void createUser() throws Exception {
         // Setup test data
         User expectedUser = new User("Jane", "Doe");
 
@@ -77,7 +77,7 @@ public class RedisApplicationTests {
     }
 
     @Test
-    public void testGetUser() throws Exception {
+    public void getUser() throws Exception {
         // Setup test data
         User expectedUser = new User("John", "Doe");
 
@@ -101,7 +101,7 @@ public class RedisApplicationTests {
     }
 
     @Test
-    public void testUpdateUser() throws Exception {
+    public void updateUser() throws Exception {
         // Setup test data
         User expectedUser = new User("Johnny", "Appleseed");
 
@@ -137,7 +137,7 @@ public class RedisApplicationTests {
     }
 
     @Test
-    public void testDeleteUser() throws Exception {
+    public void deleteUser() throws Exception {
         // Setup test data
         User expectedUser = new User("Sally", "Ride");
         expectedUser = userService.createUser(expectedUser);
