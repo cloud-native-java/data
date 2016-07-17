@@ -14,51 +14,48 @@ import org.neo4j.ogm.annotation.Relationship;
 @NodeEntity
 public class Warehouse {
 
-    @GraphId
-    private Long id;
+	@GraphId
+	private Long id;
 
-    private String name;
+	private String name;
 
-    @Relationship(type="HAS_ADDRESS")
-    private Address address;
+	@Relationship(type = "HAS_ADDRESS")
+	private Address address;
 
-    public Warehouse() {
-    }
+	public Warehouse() {
+	}
 
-    public Warehouse(String name) {
-        this.name = name;
-    }
+	public Warehouse(String name) {
+		this.name = name;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Address getAddress() {
-        return address;
-    }
+	public Address getAddress() {
+		return address;
+	}
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
-    @Override
-    public String toString() {
-        return "Warehouse{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address=" + address +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Warehouse{" + "id=" + id + ", name='" + name + '\''
+				+ ", address=" + address + '}';
+	}
 }

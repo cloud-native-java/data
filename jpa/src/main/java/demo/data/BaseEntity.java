@@ -9,8 +9,8 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
 /**
- * An entity base class that is used for auditing purposes in the {@link Account}
- * bounded context.
+ * An entity base class that is used for auditing purposes in the
+ * {@link Account} bounded context.
  *
  * @author Kenny Bastani
  * @author Josh Long
@@ -19,36 +19,34 @@ import javax.persistence.MappedSuperclass;
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
 
-    @CreatedDate
-    private Long createdAt;
+	@CreatedDate
+	private Long createdAt;
 
-    @LastModifiedDate
-    private Long lastModified;
+	@LastModifiedDate
+	private Long lastModified;
 
-    public BaseEntity() {
-    }
+	public BaseEntity() {
+	}
 
-    public Long getCreatedAt() {
-        return createdAt;
-    }
+	public Long getCreatedAt() {
+		return createdAt;
+	}
 
-    public void setCreatedAt(Long createdAt) {
-        this.createdAt = createdAt;
-    }
+	public void setCreatedAt(Long createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public Long getLastModified() {
-        return lastModified;
-    }
+	public Long getLastModified() {
+		return lastModified;
+	}
 
-    public void setLastModified(Long lastModified) {
-        this.lastModified = lastModified;
-    }
+	public void setLastModified(Long lastModified) {
+		this.lastModified = lastModified;
+	}
 
-    @Override
-    public String toString() {
-        return "BaseEntity{" +
-                "createdAt=" + createdAt +
-                ", lastModified=" + lastModified +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "BaseEntity{" + "createdAt=" + createdAt + ", lastModified="
+				+ lastModified + '}';
+	}
 }

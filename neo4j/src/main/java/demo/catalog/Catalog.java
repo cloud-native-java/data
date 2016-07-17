@@ -11,51 +11,48 @@ import java.util.Set;
 @NodeEntity
 public class Catalog {
 
-    @GraphId
-    private Long id;
+	@GraphId
+	private Long id;
 
-    @Relationship(type = "HAS_PRODUCT", direction = "OUTGOING")
-    private Set<Product> products = new HashSet<>();
+	@Relationship(type = "HAS_PRODUCT", direction = "OUTGOING")
+	private Set<Product> products = new HashSet<>();
 
-    private String name;
+	private String name;
 
-    public Catalog() {
-    }
+	public Catalog() {
+	}
 
-    public Catalog(String name) {
-        this.name = name;
-    }
+	public Catalog(String name) {
+		this.name = name;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Set<Product> getProducts() {
-        return products;
-    }
+	public Set<Product> getProducts() {
+		return products;
+	}
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    @Override
-    public String toString() {
-        return "Catalog{" +
-                "id=" + id +
-                ", products=" + products +
-                ", name='" + name + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Catalog{" + "id=" + id + ", products=" + products + ", name='"
+				+ name + '\'' + '}';
+	}
 }

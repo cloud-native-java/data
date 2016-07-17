@@ -1,9 +1,5 @@
 package demo.inventory;
 
 public enum InventoryStatus {
-    IN_STOCK,
-    ORDERED,
-    RESERVED,
-    SHIPPED,
-    DELIVERED
+	IN_STOCK, ORDERED, RESERVED, SHIPPED, DELIVERED
 }

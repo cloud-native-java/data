@@ -7,8 +7,5 @@ package demo.order;
  * @author Josh Long
  */
 public enum OrderStatus {
-    PENDING,
-    CONFIRMED,
-    SHIPPED,
-    DELIVERED
+	PENDING, CONFIRMED, SHIPPED, DELIVERED
 }

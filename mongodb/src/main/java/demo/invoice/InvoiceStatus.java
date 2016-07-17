@@ -7,7 +7,5 @@ package demo.invoice;
  * @author Josh Long
  */
 public enum InvoiceStatus {
-    CREATED,
-    SENT,
-    PAID
+	CREATED, SENT, PAID
 }

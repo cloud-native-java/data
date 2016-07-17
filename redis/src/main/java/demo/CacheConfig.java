@@ -14,29 +14,29 @@ import org.springframework.data.redis.core.RedisTemplate;
 @EnableCaching
 public class CacheConfig {
 
-    @Bean
-    public JedisConnectionFactory redisConnectionFactory(
-            @Value("${spring.redis.port}") Integer redisPort,
-            @Value("${spring.redis.host}") String redisHost) {
-        JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();
+	@Bean
+	public JedisConnectionFactory redisConnectionFactory(
+			@Value("${spring.redis.port}") Integer redisPort,
+			@Value("${spring.redis.host}") String redisHost) {
+		JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();
 
-        redisConnectionFactory.setHostName(redisHost);
-        redisConnectionFactory.setPort(redisPort);
+		redisConnectionFactory.setHostName(redisHost);
+		redisConnectionFactory.setPort(redisPort);
 
-        return redisConnectionFactory;
-    }
+		return redisConnectionFactory;
+	}
 
-    @Bean
-    public RedisTemplate redisTemplate(RedisConnectionFactory cf) {
-        RedisTemplate redisTemplate = new RedisTemplate();
-        redisTemplate.setConnectionFactory(cf);
-        return redisTemplate;
-    }
+	@Bean
+	public RedisTemplate redisTemplate(RedisConnectionFactory cf) {
+		RedisTemplate redisTemplate = new RedisTemplate();
+		redisTemplate.setConnectionFactory(cf);
+		return redisTemplate;
+	}
 
-    @Bean
-    public CacheManager cacheManager(RedisTemplate redisTemplate) {
-        RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
-        cacheManager.setDefaultExpiration(3000);
-        return cacheManager;
-    }
+	@Bean
+	public CacheManager cacheManager(RedisTemplate redisTemplate) {
+		RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
+		cacheManager.setDefaultExpiration(3000);
+		return cacheManager;
+	}
 }
