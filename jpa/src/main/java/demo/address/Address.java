@@ -106,10 +106,9 @@ public class Address extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "Address{" + "id=" + id + ", street1='" + street1 + '\''
-				+ ", street2='" + street2 + '\'' + ", state='" + state + '\''
-				+ ", city='" + city + '\'' + ", country='" + country + '\''
-				+ ", addressType='" + addressType + '\'' + ", zipCode="
-				+ zipCode + '}';
+		return "Address{" + "id=" + id + ", street1='" + street1 + '\'' + ", street2='"
+				+ street2 + '\'' + ", state='" + state + '\'' + ", city='" + city + '\''
+				+ ", country='" + country + '\'' + ", addressType='" + addressType + '\''
+				+ ", zipCode=" + zipCode + '}';
 	}
 }

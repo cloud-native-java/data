@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple domain class for the {@link Invoice} concept of the order context.
+ * A simple domain class for the {@link Invoice}
+ * concept of the order context.
  *
  * @author Kenny Bastani
  * @author Josh Long
@@ -78,9 +79,8 @@ public class Invoice extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "Invoice{" + "invoiceId='" + invoiceId + '\'' + ", customerId='"
-				+ customerId + '\'' + ", orders=" + orders
-				+ ", billingAddress=" + billingAddress + ", invoiceStatus="
-				+ invoiceStatus + "} " + super.toString();
+		return "Invoice{" + "invoiceId='" + invoiceId + '\'' + ", customerId='" + customerId
+				+ '\'' + ", orders=" + orders + ", billingAddress=" + billingAddress
+				+ ", invoiceStatus=" + invoiceStatus + "} " + super.toString();
 	}
 }

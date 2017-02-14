@@ -83,7 +83,7 @@ public class Shipment {
 	@Override
 	public String toString() {
 		return "Shipment{" + "id=" + id + ", inventories=" + inventories
-				+ ", deliveryAddress=" + deliveryAddress + ", fromWarehouse="
-				+ fromWarehouse + ", shipmentStatus=" + shipmentStatus + '}';
+				+ ", deliveryAddress=" + deliveryAddress + ", fromWarehouse=" + fromWarehouse
+				+ ", shipmentStatus=" + shipmentStatus + '}';
 	}
 }

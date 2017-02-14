@@ -1,7 +1,8 @@
 package demo.address;
 
 /**
- * A simple {@link Address} entity for an order or invoice.
+ * A simple {@link Address} entity for an order or
+ * invoice.
  *
  * @author Kenny Bastani
  * @author Josh Long
@@ -80,9 +81,8 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address{" + "street1='" + street1 + '\'' + ", street2='"
-				+ street2 + '\'' + ", state='" + state + '\'' + ", city='"
-				+ city + '\'' + ", country='" + country + '\'' + ", zipCode="
-				+ zipCode + ", addressType=" + addressType + '}';
+		return "Address{" + "street1='" + street1 + '\'' + ", street2='" + street2 + '\''
+				+ ", state='" + state + '\'' + ", city='" + city + '\'' + ", country='" + country
+				+ '\'' + ", zipCode=" + zipCode + ", addressType=" + addressType + '}';
 	}
 }

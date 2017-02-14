@@ -34,11 +34,10 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = {InventoryApplication.class})
+@SpringApplicationConfiguration(classes = { InventoryApplication.class })
 public class InventoryApplicationTests {
 
-	private Logger log = LoggerFactory
-			.getLogger(InventoryApplicationTests.class);
+	private Logger log = LoggerFactory.getLogger(InventoryApplicationTests.class);
 
 	@Autowired
 	private ProductRepository productRepository;
@@ -64,11 +63,11 @@ public class InventoryApplicationTests {
 	@Before
 	public void setup() {
 		try {
-			neo4jConfiguration
-					.getSession()
-					.query("MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r;",
-							new HashMap<>()).queryResults();
-		} catch (Exception e) {
+			neo4jConfiguration.getSession()
+					.query("MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r;", new HashMap<>())
+					.queryResults();
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Neo4j isn't running or this test can't connect to it!");
 		}
@@ -79,17 +78,13 @@ public class InventoryApplicationTests {
 		Warehouse warehouse = new Warehouse("Pivotal SF");
 
 		List<Product> products = Arrays
-				.asList(new Product(
-						"Best. Cloud. Ever. (T-Shirt, Men's Large)",
-						"SKU-24642", 21.99),
-						new Product("Like a BOSH (T-Shirt, Women's Medium)",
-								"SKU-34563", 14.99),
-						new Product(
-								"We're gonna need a bigger VM (T-Shirt, Women's Small)",
+				.asList(
+						new Product("Best. Cloud. Ever. (T-Shirt, Men's Large)", "SKU-24642", 21.99),
+						new Product("Like a BOSH (T-Shirt, Women's Medium)", "SKU-34563", 14.99),
+						new Product("We're gonna need a bigger VM (T-Shirt, Women's Small)",
 								"SKU-12464", 13.99),
-						new Product("cf push awesome (Hoodie, Men's Medium)",
-								"SKU-64233", 21.99)).stream()
-				.collect(Collectors.toList());
+						new Product("cf push awesome (Hoodie, Men's Medium)", "SKU-64233", 21.99))
+				.stream().collect(Collectors.toList());
 
 		productRepository.save(products);
 
@@ -110,11 +105,11 @@ public class InventoryApplicationTests {
 		assertThat(catalog1, is(notNullValue()));
 		assertThat(catalog1.getName(), is(catalog.getName()));
 
-		Address warehouseAddress = new Address("875 Howard St", null, "CA",
-				"San Francisco", "United States", 94103);
+		Address warehouseAddress = new Address("875 Howard St", null, "CA", "San Francisco",
+				"United States", 94103);
 
-		Address shipToAddress = new Address("1600 Amphitheatre Parkway", null,
-				"CA", "Mountain View", "United States", 94043);
+		Address shipToAddress = new Address("1600 Amphitheatre Parkway", null, "CA",
+				"Mountain View", "United States", 94043);
 
 		// Save the addresses
 		addressRepository.save(Arrays.asList(warehouseAddress, shipToAddress));
@@ -148,12 +143,11 @@ public class InventoryApplicationTests {
 		// randomized inventory number
 		Set<Inventory> inventories = products
 				.stream()
-				.map(a -> new Inventory(IntStream
-						.range(0, 9)
-						.mapToObj(
-								x -> Integer.toString(new Random().nextInt(9)))
-						.collect(Collectors.joining("")), a, finalWarehouse,
-						InventoryStatus.IN_STOCK)).collect(Collectors.toSet());
+				.map(
+						a -> new Inventory(IntStream.range(0, 9)
+								.mapToObj(x -> Integer.toString(new Random().nextInt(9)))
+								.collect(Collectors.joining("")), a, finalWarehouse,
+								InventoryStatus.IN_STOCK)).collect(Collectors.toSet());
 
 		inventoryRepository.save(inventories);
 

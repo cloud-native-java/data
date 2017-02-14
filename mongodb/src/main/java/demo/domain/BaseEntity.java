@@ -3,8 +3,9 @@ package demo.domain;
 import org.joda.time.DateTime;
 
 /**
- * An abstract base class that is inherited by other domain classes in the order
- * application context.
+ * An abstract base class that is inherited by
+ * other domain classes in the order application
+ * context.
  *
  * @author Kenny Bastani
  * @author Josh Long
@@ -31,7 +32,7 @@ public class BaseEntity {
 
 	@Override
 	public String toString() {
-		return "BaseEntity{" + "lastModified=" + lastModified + ", createdAt="
-				+ createdAt + '}';
+		return "BaseEntity{" + "lastModified=" + lastModified + ", createdAt=" + createdAt
+				+ '}';
 	}
 }

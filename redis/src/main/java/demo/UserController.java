@@ -21,8 +21,7 @@ public class UserController {
 	@RequestMapping(path = "users", method = RequestMethod.POST, name = "createUser")
 	public ResponseEntity createUser(@RequestBody User user) {
 		Assert.notNull(user);
-		return Optional
-				.ofNullable(userService.createUser(user))
+		return Optional.ofNullable(userService.createUser(user))
 				.map(result -> new ResponseEntity<>(result, HttpStatus.CREATED))
 				.orElse(new ResponseEntity<>(HttpStatus.CONFLICT));
 	}
@@ -46,10 +45,8 @@ public class UserController {
 
 	@RequestMapping(path = "users/{id}", method = RequestMethod.DELETE, name = "deleteUser")
 	public ResponseEntity deleteUser(@PathVariable(value = "id") String id) {
-		return Optional
-				.ofNullable(userService.deleteUser(id))
-				.map(result -> new ResponseEntity<>(result,
-						HttpStatus.NO_CONTENT))
+		return Optional.ofNullable(userService.deleteUser(id))
+				.map(result -> new ResponseEntity<>(result, HttpStatus.NO_CONTENT))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 }

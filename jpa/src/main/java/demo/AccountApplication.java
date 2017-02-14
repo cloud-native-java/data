@@ -5,13 +5,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 /**
- * The {@link AccountApplication} is a cloud-native Spring Boot application that
+ * The {@link AccountApplication} is a
+ * cloud-native Spring Boot application that
  * manages a bounded context for @{link Customer},
- * 
- * @{link Account}, @{link CreditCard}, and @{link Address}
  *
  * @author Kenny Bastani
  * @author Josh Long
+ * @{link Account}, @{link CreditCard}, and @{link
+ * Address}
  */
 @SpringBootApplication
 @EnableJpaAuditing

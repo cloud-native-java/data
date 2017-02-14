@@ -23,10 +23,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ActiveProfiles(profiles = "test")
 public class AccountApplicationTests extends TestCase {
 
-	private Logger log = LoggerFactory.getLogger(AccountApplicationTests.class);
-
 	@Autowired
 	CustomerRepository customerRepository;
+	private Logger log = LoggerFactory.getLogger(AccountApplicationTests.class);
 
 	@Test
 	public void customerTest() {
@@ -36,12 +35,10 @@ public class AccountApplicationTests extends TestCase {
 		Account account = new Account("12345");
 
 		// Create a new customer for the account
-		Customer customer = new Customer("Jane", "Doe", "jane.doe@gmail.com",
-				account);
+		Customer customer = new Customer("Jane", "Doe", "jane.doe@gmail.com", account);
 
 		// Create a new credit card for the account
-		CreditCard creditCard = new CreditCard("1234567801234567",
-				CreditCardType.VISA);
+		CreditCard creditCard = new CreditCard("1234567801234567", CreditCardType.VISA);
 
 		// Add the credit card to the customer's
 		// account
@@ -49,8 +46,8 @@ public class AccountApplicationTests extends TestCase {
 
 		// Create a new shipping address for the
 		// customer
-		Address address = new Address("1600 Pennsylvania Ave NW", null, "DC",
-				"Washington", "United States", AddressType.SHIPPING, 20500);
+		Address address = new Address("1600 Pennsylvania Ave NW", null, "DC", "Washington",
+				"United States", AddressType.SHIPPING, 20500);
 
 		// Add address to the customer's account
 		customer.getAccount().getAddresses().add(address);

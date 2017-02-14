@@ -49,7 +49,7 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User{" + "id='" + id + '\'' + ", firstName='" + firstName
-				+ '\'' + ", lastName='" + lastName + '\'' + '}';
+		return "User{" + "id='" + id + '\'' + ", firstName='" + firstName + '\''
+				+ ", lastName='" + lastName + '\'' + '}';
 	}
 }

@@ -4,7 +4,8 @@ import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 /**
- * A simple domain class for the {@link Product} concept in the order context.
+ * A simple domain class for the {@link Product}
+ * concept in the order context.
  *
  * @author Kenny Bastani
  * @author Josh Long
@@ -60,8 +61,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product{" + "id=" + id + ", name='" + name + '\''
-				+ ", productId='" + productId + '\'' + ", unitPrice="
-				+ unitPrice + '}';
+		return "Product{" + "id=" + id + ", name='" + name + '\'' + ", productId='"
+				+ productId + '\'' + ", unitPrice=" + unitPrice + '}';
 	}
 }

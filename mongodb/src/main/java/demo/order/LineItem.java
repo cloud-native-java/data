@@ -1,7 +1,8 @@
 package demo.order;
 
 /**
- * A simple domain class for the {@link LineItem} concept in the order context.
+ * A simple domain class for the {@link LineItem}
+ * concept in the order context.
  *
  * @author Kenny Bastani
  * @author Josh Long
@@ -12,8 +13,8 @@ public class LineItem {
 	private Integer quantity;
 	private Double price, tax;
 
-	public LineItem(String name, String productId, Integer quantity,
-			Double price, Double tax) {
+	public LineItem(String name, String productId, Integer quantity, Double price,
+			Double tax) {
 		this.name = name;
 		this.productId = productId;
 		this.quantity = quantity;
@@ -63,8 +64,7 @@ public class LineItem {
 
 	@Override
 	public String toString() {
-		return "LineItem{" + "name='" + name + '\'' + ", productId='"
-				+ productId + '\'' + ", quantity=" + quantity + ", price="
-				+ price + ", tax=" + tax + '}';
+		return "LineItem{" + "name='" + name + '\'' + ", productId='" + productId + '\''
+				+ ", quantity=" + quantity + ", price=" + price + ", tax=" + tax + '}';
 	}
 }

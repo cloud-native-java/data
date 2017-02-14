@@ -17,8 +17,7 @@ public class Customer extends BaseEntity {
 	public Customer() {
 	}
 
-	public Customer(String firstName, String lastName, String email,
-			Account account) {
+	public Customer(String firstName, String lastName, String email, Account account) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -70,8 +69,8 @@ public class Customer extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "Customer{" + "id=" + id + ", firstName='" + firstName + '\''
-				+ ", lastName='" + lastName + '\'' + ", email='" + email + '\''
-				+ ", account=" + account + "} " + super.toString();
+		return "Customer{" + "id=" + id + ", firstName='" + firstName + '\'' + ", lastName='"
+				+ lastName + '\'' + ", email='" + email + '\'' + ", account=" + account + "} "
+				+ super.toString();
 	}
 }

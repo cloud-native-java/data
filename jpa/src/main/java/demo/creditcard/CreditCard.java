@@ -5,8 +5,8 @@ import demo.data.BaseEntity;
 import javax.persistence.*;
 
 /**
- * A {@link CreditCard} entity is used for processing payments and belongs to an
- * account.
+ * A {@link CreditCard} entity is used for
+ * processing payments and belongs to an account.
  *
  * @author Kenny Bastani
  * @author Josh Long
@@ -57,7 +57,7 @@ public class CreditCard extends BaseEntity {
 	@Override
 	public String toString() {
 		return "CreditCard{" + "id=" + id + ", number='"
-				+ number.replaceAll("([\\d]{4})(?!$)", "****-") + '\''
-				+ ", type='" + type + '\'' + '}';
+				+ number.replaceAll("([\\d]{4})(?!$)", "****-") + '\'' + ", type='" + type + '\''
+				+ '}';
 	}
 }

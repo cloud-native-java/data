@@ -4,7 +4,8 @@ import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 /**
- * A simple {@link Address} entity for an order or invoice.
+ * A simple {@link Address} entity for an order or
+ * invoice.
  *
  * @author Kenny Bastani
  * @author Josh Long
@@ -89,9 +90,8 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address{" + "id=" + id + ", street1='" + street1 + '\''
-				+ ", street2='" + street2 + '\'' + ", state='" + state + '\''
-				+ ", city='" + city + '\'' + ", country='" + country + '\''
-				+ ", zipCode=" + zipCode + '}';
+		return "Address{" + "id=" + id + ", street1='" + street1 + '\'' + ", street2='"
+				+ street2 + '\'' + ", state='" + state + '\'' + ", city='" + city + '\''
+				+ ", country='" + country + '\'' + ", zipCode=" + zipCode + '}';
 	}
 }

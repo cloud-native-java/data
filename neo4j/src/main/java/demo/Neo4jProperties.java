@@ -23,12 +23,16 @@ class Neo4jProperties {
 		return host;
 	}
 
+	public void setHost(String host) {
+		this.host = host;
+	}
+
 	public String getUri() {
 		return uri;
 	}
 
-	public void setHost(String host) {
-		this.host = host;
+	public void setUri(String uri) {
+		this.uri = uri;
 	}
 
 	public int getPort() {
@@ -48,12 +52,7 @@ class Neo4jProperties {
 			this.uri = String.format("http://%s:%s", this.host, this.port);
 		}
 		LogFactory.getLog(getClass()).info(
-				String.format("host=%s, port=%s, uri=%s", this.host, this.port,
-						this.uri));
-	}
-
-	public void setUri(String uri) {
-		this.uri = uri;
+				String.format("host=%s, port=%s, uri=%s", this.host, this.port, this.uri));
 	}
 
 	public String getPassword() {
