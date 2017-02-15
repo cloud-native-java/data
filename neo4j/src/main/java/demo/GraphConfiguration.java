@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.neo4j.config.Neo4jConfiguration;
 import org.springframework.data.neo4j.server.Neo4jServer;
 import org.springframework.data.neo4j.server.RemoteServer;
-import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -30,21 +29,14 @@ class GraphConfiguration extends Neo4jConfiguration {
 		String uri = this.properties.getUri();
 		String pw = this.properties.getPassword();
 		String user = this.properties.getUsername();
-		if (StringUtils.hasText(pw) && StringUtils.hasText(user)) {
-			return new RemoteServer(uri, user, pw);
-		}
-		return new RemoteServer(uri);
+		return new RemoteServer(uri, user, pw);
 	}
 
 	@Bean
 	public SessionFactory getSessionFactory() {
-		// we need to specify which packages Neo4j
-		// should scan
-		// we'll use classes in each package to avoid
-		// brittleness
-		Class<?>[] packageClasses = { ProductRepository.class, ShipmentRepository.class,
+		Class<?>[] packageClasses = {ProductRepository.class, ShipmentRepository.class,
 				WarehouseRepository.class, AddressRepository.class, InventoryRepository.class,
-				CatalogRepository.class };
+				CatalogRepository.class};
 		String[] packageNames = Arrays.asList(packageClasses).stream()
 				.map(c -> getClass().getPackage().getName()).collect(Collectors.toList())
 				.toArray(new String[packageClasses.length]);

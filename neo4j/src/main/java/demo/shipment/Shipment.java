@@ -10,12 +10,6 @@ import org.neo4j.ogm.annotation.Relationship;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * A simple domain class for the {@link Shipment}
- *
- * @author Kenny Bastani
- * @author Josh Long
- */
 @NodeEntity
 public class Shipment {
 

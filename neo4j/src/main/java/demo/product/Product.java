@@ -3,13 +3,6 @@ package demo.product;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 
-/**
- * A simple domain class for the {@link Product}
- * concept in the order context.
- *
- * @author Kenny Bastani
- * @author Josh Long
- */
 @NodeEntity
 public class Product {
 

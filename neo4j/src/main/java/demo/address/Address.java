@@ -3,13 +3,6 @@ package demo.address;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 
-/**
- * A simple {@link Address} entity for an order or
- * invoice.
- *
- * @author Kenny Bastani
- * @author Josh Long
- */
 @NodeEntity
 public class Address {
 
