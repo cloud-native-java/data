@@ -37,7 +37,7 @@ class GraphConfiguration extends Neo4jConfiguration {
 		Class<?>[] packageClasses = {ProductRepository.class, ShipmentRepository.class,
 				WarehouseRepository.class, AddressRepository.class, InventoryRepository.class,
 				CatalogRepository.class};
-		String[] packageNames = Arrays.asList(packageClasses).stream()
+		String[] packageNames = Arrays.stream(packageClasses)
 				.map(c -> getClass().getPackage().getName()).collect(Collectors.toList())
 				.toArray(new String[packageClasses.length]);
 		return new SessionFactory(packageNames);
