@@ -24,45 +24,45 @@ import java.util.List;
 @Configuration
 public class MongoConfiguration extends AbstractMongoConfiguration {
 
-	@Value("${spring.data.mongodb.host}")
-	private String host;
+ @Value("${spring.data.mongodb.host}")
+ private String host;
 
-	@Value("${spring.data.mongodb.port}")
-	private Integer port;
+ @Value("${spring.data.mongodb.port}")
+ private Integer port;
 
-	@Bean
-	public Mongo mongo() throws Exception {
-		return new MongoClient(host, port);
-	}
+ @Bean
+ public Mongo mongo() throws Exception {
+  return new MongoClient(host, port);
+ }
 
-	@Override
-	public String getDatabaseName() {
-		return "orders";
-	}
+ @Override
+ public String getDatabaseName() {
+  return "orders";
+ }
 
-	@Override
-	public String getMappingBasePackage() {
-		return "demo";
-	}
+ @Override
+ public String getMappingBasePackage() {
+  return "demo";
+ }
 
-	@Bean
-	@Override
-	public CustomConversions customConversions() {
-		List<Converter<?, ?>> converterList = new ArrayList<>();
-		converterList.add(new LongToDateTimeConverter());
-		return new CustomConversions(converterList);
-	}
+ @Bean
+ @Override
+ public CustomConversions customConversions() {
+  List<Converter<?, ?>> converterList = new ArrayList<>();
+  converterList.add(new LongToDateTimeConverter());
+  return new CustomConversions(converterList);
+ }
 
-	@ReadingConverter
-	static class LongToDateTimeConverter implements Converter<Long, DateTime> {
+ @ReadingConverter
+ static class LongToDateTimeConverter implements Converter<Long, DateTime> {
 
-		@Override
-		public DateTime convert(Long source) {
-			if (source == null) {
-				return null;
-			}
+  @Override
+  public DateTime convert(Long source) {
+   if (source == null) {
+    return null;
+   }
 
-			return new DateTime(source);
-		}
-	}
+   return new DateTime(source);
+  }
+ }
 }

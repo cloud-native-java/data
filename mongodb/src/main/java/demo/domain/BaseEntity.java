@@ -12,27 +12,27 @@ import org.joda.time.DateTime;
  */
 public class BaseEntity {
 
-	private DateTime lastModified, createdAt;
+ private DateTime lastModified, createdAt;
 
-	public DateTime getLastModified() {
-		return lastModified;
-	}
+ public DateTime getLastModified() {
+  return lastModified;
+ }
 
-	public void setLastModified(DateTime lastModified) {
-		this.lastModified = lastModified;
-	}
+ public void setLastModified(DateTime lastModified) {
+  this.lastModified = lastModified;
+ }
 
-	public DateTime getCreatedAt() {
-		return createdAt;
-	}
+ public DateTime getCreatedAt() {
+  return createdAt;
+ }
 
-	public void setCreatedAt(DateTime createdAt) {
-		this.createdAt = createdAt;
-	}
+ public void setCreatedAt(DateTime createdAt) {
+  this.createdAt = createdAt;
+ }
 
-	@Override
-	public String toString() {
-		return "BaseEntity{" + "lastModified=" + lastModified + ", createdAt=" + createdAt
-				+ '}';
-	}
+ @Override
+ public String toString() {
+  return "BaseEntity{" + "lastModified=" + lastModified + ", createdAt=" + createdAt
+    + '}';
+ }
 }

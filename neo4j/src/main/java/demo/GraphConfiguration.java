@@ -21,30 +21,30 @@ import java.util.stream.Collectors;
 @Configuration
 class GraphConfiguration extends Neo4jConfiguration {
 
-	@Autowired
-	private Neo4jProperties properties;
+ @Autowired
+ private Neo4jProperties properties;
 
-	@Bean
-	public Neo4jServer neo4jServer() {
-		String uri = this.properties.getUri();
-		String pw = this.properties.getPassword();
-		String user = this.properties.getUsername();
-		return new RemoteServer(uri, user, pw);
-	}
+ @Bean
+ public Neo4jServer neo4jServer() {
+  String uri = this.properties.getUri();
+  String pw = this.properties.getPassword();
+  String user = this.properties.getUsername();
+  return new RemoteServer(uri, user, pw);
+ }
 
-	@Bean
-	public SessionFactory getSessionFactory() {
-		Class<?>[] packageClasses = {ProductRepository.class, ShipmentRepository.class,
-				WarehouseRepository.class, AddressRepository.class, InventoryRepository.class,
-				CatalogRepository.class};
-		String[] packageNames = Arrays.stream(packageClasses)
-				.map(c -> getClass().getPackage().getName()).collect(Collectors.toList())
-				.toArray(new String[packageClasses.length]);
-		return new SessionFactory(packageNames);
-	}
+ @Bean
+ public SessionFactory getSessionFactory() {
+  Class<?>[] packageClasses = {ProductRepository.class, ShipmentRepository.class,
+    WarehouseRepository.class, AddressRepository.class, InventoryRepository.class,
+    CatalogRepository.class};
+  String[] packageNames = Arrays.stream(packageClasses)
+    .map(c -> getClass().getPackage().getName()).collect(Collectors.toList())
+    .toArray(new String[packageClasses.length]);
+  return new SessionFactory(packageNames);
+ }
 
-	@Bean
-	public Session getSession() throws Exception {
-		return super.getSession();
-	}
+ @Bean
+ public Session getSession() throws Exception {
+  return super.getSession();
+ }
 }

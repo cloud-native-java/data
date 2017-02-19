@@ -9,52 +9,52 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-	private UserRepository userRepository;
+ private UserRepository userRepository;
 
-	@Autowired
-	public UserService(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
+ @Autowired
+ public UserService(UserRepository userRepository) {
+  this.userRepository = userRepository;
+ }
 
-	@CacheEvict(value = "user", key = "#user.getId()")
-	public User createUser(User user) {
+ @CacheEvict(value = "user", key = "#user.getId()")
+ public User createUser(User user) {
 
-		User result = null;
+  User result = null;
 
-		if (!userRepository.exists(user.getId())) {
-			result = this.userRepository.save(user);
-		}
+  if (!userRepository.exists(user.getId())) {
+   result = this.userRepository.save(user);
+  }
 
-		return result;
-	}
+  return result;
+ }
 
-	@Cacheable(value = "user")
-	public User getUser(String id) {
-		return this.userRepository.findOne(id);
-	}
+ @Cacheable(value = "user")
+ public User getUser(String id) {
+  return this.userRepository.findOne(id);
+ }
 
-	@CachePut(value = "user", key = "#id")
-	public User updateUser(String id, User user) {
+ @CachePut(value = "user", key = "#id")
+ public User updateUser(String id, User user) {
 
-		User result = null;
+  User result = null;
 
-		if (userRepository.exists(user.getId())) {
-			result = this.userRepository.save(user);
-		}
+  if (userRepository.exists(user.getId())) {
+   result = this.userRepository.save(user);
+  }
 
-		return result;
-	}
+  return result;
+ }
 
-	@CacheEvict(value = "user", key = "#id")
-	public boolean deleteUser(String id) {
+ @CacheEvict(value = "user", key = "#id")
+ public boolean deleteUser(String id) {
 
-		boolean deleted = false;
+  boolean deleted = false;
 
-		if (userRepository.exists(id)) {
-			this.userRepository.delete(id);
-			deleted = true;
-		}
+  if (userRepository.exists(id)) {
+   this.userRepository.delete(id);
+   deleted = true;
+  }
 
-		return deleted;
-	}
+  return deleted;
+ }
 }

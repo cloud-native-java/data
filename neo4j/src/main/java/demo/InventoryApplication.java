@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableConfigurationProperties // TODO remove this since Boot 1.4
 @EnableTransactionManagement
 public class InventoryApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(InventoryApplication.class, args);
-	}
+ public static void main(String[] args) {
+  SpringApplication.run(InventoryApplication.class, args);
+ }
 }
