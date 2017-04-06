@@ -10,8 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * This entity stores information about a
- * {@link Customer}'s {@link Account}.
+ * This entity stores information about
+ * a {@link Customer}'s {@link Account}.
  *
  * @author Kenny Bastani
  * @author Josh Long
@@ -20,8 +20,11 @@ import java.util.Set;
 public class Account extends BaseEntity {
 
  private Long id;
+
  private String accountNumber;
+
  private Set<CreditCard> creditCards;
+
  private Set<Address> addresses;
 
  public Account() {
@@ -72,7 +75,7 @@ public class Account extends BaseEntity {
  @Override
  public String toString() {
   return "Account{" + "id=" + id + ", accountNumber='" + accountNumber + '\''
-    + ", creditCards=" + creditCards + ", addresses=" + addresses + "} "
-    + super.toString();
+   + ", creditCards=" + creditCards + ", addresses=" + addresses + "} "
+   + super.toString();
  }
 }

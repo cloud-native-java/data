@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple domain class for the {@link Order}
- * concept in the order context.
+ * A simple domain class for the
+ * {@link Order} concept in the order
+ * context.
  *
  * @author Kenny Bastani
  * @author Josh Long
@@ -20,9 +21,13 @@ import java.util.List;
 public class Order extends BaseEntity {
 
  private String orderId;
+
  private String accountNumber;
+
  private OrderStatus orderStatus;
+
  private List<LineItem> lineItems = new ArrayList<>();
+
  private Address shippingAddress;
 
  public Order(String accountNumber, Address shippingAddress) {
@@ -79,8 +84,9 @@ public class Order extends BaseEntity {
 
  @Override
  public String toString() {
-  return "Order{" + "orderId='" + orderId + '\'' + ", accountNumber='" + accountNumber
-    + '\'' + ", orderStatus=" + orderStatus + ", lineItems=" + lineItems
-    + ", shippingAddress=" + shippingAddress + "} " + super.toString();
+  return "Order{" + "orderId='" + orderId + '\'' + ", accountNumber='"
+   + accountNumber + '\'' + ", orderStatus=" + orderStatus + ", lineItems="
+   + lineItems + ", shippingAddress=" + shippingAddress + "} "
+   + super.toString();
  }
 }

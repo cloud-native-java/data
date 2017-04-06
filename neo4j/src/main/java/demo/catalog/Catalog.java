@@ -52,7 +52,7 @@ public class Catalog {
 
  @Override
  public String toString() {
-  return "Catalog{" + "id=" + id + ", products=" + products + ", name='" + name + '\''
-    + '}';
+  return "Catalog{" + "id=" + id + ", products=" + products + ", name='" + name
+   + '\'' + '}';
  }
 }

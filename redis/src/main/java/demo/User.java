@@ -10,7 +10,9 @@ public class User implements Serializable {
 
  @Id
  private String id;
+
  private String firstName;
+
  private String lastName;
 
  public User() {
@@ -50,6 +52,6 @@ public class User implements Serializable {
  @Override
  public String toString() {
   return "User{" + "id='" + id + '\'' + ", firstName='" + firstName + '\''
-    + ", lastName='" + lastName + '\'' + '}';
+   + ", lastName='" + lastName + '\'' + '}';
  }
 }

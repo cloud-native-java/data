@@ -1,4 +1,4 @@
-package demo;
+    package demo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -28,12 +28,16 @@ public class UserServiceApplicationTests {
 
  @Autowired
  private WebApplicationContext context;
+
  @Autowired
  private UserService userService;
+
  @Autowired
  private UserRepository userRepository;
+
  @Autowired
  private ObjectMapper objectMapper;
+
  @Autowired
  private RedisTemplate redisTemplate;
 
@@ -60,18 +64,18 @@ public class UserServiceApplicationTests {
 
   // Test create user success
   User actualUser = objectMapper.readValue(
-    this.mvc
-      .perform(
-        post("/users").content(objectMapper.writeValueAsString(expectedUser))
-          .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-      .andExpect(status().isCreated()).andReturn().getResponse()
-      .getContentAsString(), User.class);
+   this.mvc
+    .perform(
+     post("/users").content(objectMapper.writeValueAsString(expectedUser))
+      .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+    .andExpect(status().isCreated()).andReturn().getResponse()
+    .getContentAsString(), User.class);
 
   // Test create user conflict
   this.mvc.perform(
-    post("/users").content(objectMapper.writeValueAsString(expectedUser))
-      .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)).andExpect(
-    status().isConflict());
+   post("/users").content(objectMapper.writeValueAsString(expectedUser))
+    .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)).andExpect(
+   status().isConflict());
 
   // Clean up
   userService.deleteUser(actualUser.getId());
@@ -85,16 +89,17 @@ public class UserServiceApplicationTests {
   expectedUser = userService.createUser(expectedUser);
 
   // Test get user success
-  this.mvc.perform(get("/users/{id}", expectedUser.getId())).andExpect(status().isOk())
-    .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-    .andExpect(content().string(objectMapper.writeValueAsString(expectedUser)));
+  this.mvc.perform(get("/users/{id}", expectedUser.getId()))
+   .andExpect(status().isOk())
+   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+   .andExpect(content().string(objectMapper.writeValueAsString(expectedUser)));
 
   // Delete user
   userService.deleteUser(expectedUser.getId());
 
   // Test get user not found
   this.mvc.perform(get("/users/{id}", expectedUser.getId())).andExpect(
-    status().isNotFound());
+   status().isNotFound());
 
   // Clean up
   userService.deleteUser(expectedUser.getId());
@@ -107,28 +112,32 @@ public class UserServiceApplicationTests {
 
   // Test get user not found
   this.mvc.perform(get("/users/{id}", expectedUser.getId())).andExpect(
-    status().isNotFound());
+   status().isNotFound());
 
-  // Test re-create user for cache invalidation
+  // Test re-create user for cache
+  // invalidation
   expectedUser = userService.createUser(expectedUser);
 
-  this.mvc.perform(get("/users/{id}", expectedUser.getId())).andExpect(status().isOk())
-    .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-    .andExpect(content().string(objectMapper.writeValueAsString(expectedUser)));
+  this.mvc.perform(get("/users/{id}", expectedUser.getId()))
+   .andExpect(status().isOk())
+   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+   .andExpect(content().string(objectMapper.writeValueAsString(expectedUser)));
 
   // Change first name
   expectedUser.setFirstName("John");
 
-  // Test update user for cache invalidation
+  // Test update user for cache
+  // invalidation
   this.mvc.perform(
-    put("/users/{id}", expectedUser.getId()).content(
-      objectMapper.writeValueAsString(expectedUser)).contentType(
-      MediaType.APPLICATION_JSON_UTF8_VALUE)).andExpect(status().isNoContent());
+   put("/users/{id}", expectedUser.getId()).content(
+    objectMapper.writeValueAsString(expectedUser)).contentType(
+    MediaType.APPLICATION_JSON_UTF8_VALUE)).andExpect(status().isNoContent());
 
   // Test that user was updated
-  this.mvc.perform(get("/users/{id}", expectedUser.getId())).andExpect(status().isOk())
-    .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-    .andExpect(content().string(objectMapper.writeValueAsString(expectedUser)));
+  this.mvc.perform(get("/users/{id}", expectedUser.getId()))
+   .andExpect(status().isOk())
+   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+   .andExpect(content().string(objectMapper.writeValueAsString(expectedUser)));
 
   // Clean up
   userService.deleteUser(expectedUser.getId());
@@ -140,17 +149,20 @@ public class UserServiceApplicationTests {
   User expectedUser = new User("Sally", "Ride");
   expectedUser = userService.createUser(expectedUser);
 
-  // Test getting the user to put into cache
-  this.mvc.perform(get("/users/{id}", expectedUser.getId())).andExpect(status().isOk())
-    .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-    .andExpect(content().string(objectMapper.writeValueAsString(expectedUser)));
+  // Test getting the user to put into
+  // cache
+  this.mvc.perform(get("/users/{id}", expectedUser.getId()))
+   .andExpect(status().isOk())
+   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+   .andExpect(content().string(objectMapper.writeValueAsString(expectedUser)));
 
-  // Delete the user and remove from cache
+  // Delete the user and remove from
+  // cache
   this.mvc.perform(delete("/users/{id}", expectedUser.getId())).andExpect(
-    status().isNoContent());
+   status().isNoContent());
 
   // Test get user not found
   this.mvc.perform(get("/users/{id}", expectedUser.getId())).andExpect(
-    status().isNotFound());
+   status().isNotFound());
  }
 }

@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @SpringBootApplication
 @EnableMongoRepositories
 public class OrderApplication {
+
  public static void main(String[] args) {
   SpringApplication.run(OrderApplication.class, args);
  }

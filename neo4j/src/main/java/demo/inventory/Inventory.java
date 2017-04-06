@@ -26,7 +26,7 @@ public class Inventory {
  }
 
  public Inventory(String inventoryNumber, Product product, Warehouse warehouse,
-   InventoryStatus status) {
+  InventoryStatus status) {
   this.inventoryNumber = inventoryNumber;
   this.product = product;
   this.warehouse = warehouse;
@@ -75,8 +75,8 @@ public class Inventory {
 
  @Override
  public String toString() {
-  return "Inventory{" + "id=" + id + ", inventoryNumber='" + inventoryNumber + '\''
-    + ", product=" + product + ", warehouse=" + warehouse + ", status=" + status
-    + '}';
+  return "Inventory{" + "id=" + id + ", inventoryNumber='" + inventoryNumber
+   + '\'' + ", product=" + product + ", warehouse=" + warehouse + ", status="
+   + status + '}';
  }
 }

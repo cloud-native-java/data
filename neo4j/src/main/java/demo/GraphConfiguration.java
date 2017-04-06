@@ -34,12 +34,12 @@ class GraphConfiguration extends Neo4jConfiguration {
 
  @Bean
  public SessionFactory getSessionFactory() {
-  Class<?>[] packageClasses = {ProductRepository.class, ShipmentRepository.class,
-    WarehouseRepository.class, AddressRepository.class, InventoryRepository.class,
-    CatalogRepository.class};
+  Class<?>[] packageClasses = { ProductRepository.class,
+   ShipmentRepository.class, WarehouseRepository.class,
+   AddressRepository.class, InventoryRepository.class, CatalogRepository.class };
   String[] packageNames = Arrays.stream(packageClasses)
-    .map(c -> getClass().getPackage().getName()).collect(Collectors.toList())
-    .toArray(new String[packageClasses.length]);
+   .map(c -> getClass().getPackage().getName()).collect(Collectors.toList())
+   .toArray(new String[packageClasses.length]);
   return new SessionFactory(packageNames);
  }
 

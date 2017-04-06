@@ -1,7 +1,8 @@
 package demo.invoice;
 
 /**
- * Describes the state of an {@link Invoice}.
+ * Describes the state of an
+ * {@link Invoice}.
  *
  * @author Kenny Bastani
  * @author Josh Long

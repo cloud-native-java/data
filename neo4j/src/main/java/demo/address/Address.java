@@ -10,13 +10,14 @@ public class Address {
  private Long id;
 
  private String street1, street2, state, city, country;
+
  private Integer zipCode;
 
  public Address() {
  }
 
  public Address(String street1, String street2, String state, String city,
-   String country, Integer zipCode) {
+  String country, Integer zipCode) {
   this.street1 = street1;
   this.street2 = street2;
   this.state = state;
@@ -83,8 +84,9 @@ public class Address {
 
  @Override
  public String toString() {
-  return "Address{" + "id=" + id + ", street1='" + street1 + '\'' + ", street2='"
-    + street2 + '\'' + ", state='" + state + '\'' + ", city='" + city + '\''
-    + ", country='" + country + '\'' + ", zipCode=" + zipCode + '}';
+  return "Address{" + "id=" + id + ", street1='" + street1 + '\''
+   + ", street2='" + street2 + '\'' + ", state='" + state + '\'' + ", city='"
+   + city + '\'' + ", country='" + country + '\'' + ", zipCode=" + zipCode
+   + '}';
  }
 }

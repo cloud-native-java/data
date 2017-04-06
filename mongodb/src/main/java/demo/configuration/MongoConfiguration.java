@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The Mongo configuration class for this Spring
- * Data MongoDB application.
+ * The Mongo configuration class for
+ * this Spring Data MongoDB application.
  *
  * @author Kenny Bastani
  * @author Josh Long

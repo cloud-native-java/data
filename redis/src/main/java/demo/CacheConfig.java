@@ -16,8 +16,8 @@ public class CacheConfig {
 
  @Bean
  public JedisConnectionFactory redisConnectionFactory(
-   @Value("${spring.redis.port}") Integer redisPort,
-   @Value("${spring.redis.host}") String redisHost) {
+  @Value("${spring.redis.port}") Integer redisPort,
+  @Value("${spring.redis.host}") String redisHost) {
   JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();
 
   redisConnectionFactory.setHostName(redisHost);

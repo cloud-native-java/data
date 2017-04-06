@@ -13,8 +13,11 @@ import javax.annotation.PostConstruct;
 class Neo4jProperties {
 
  private String host;
+
  private int port;
+
  private String password;
+
  private String username;
 
  private String uri;
@@ -52,7 +55,7 @@ class Neo4jProperties {
    this.uri = String.format("http://%s:%s", this.host, this.port);
   }
   LogFactory.getLog(getClass()).info(
-    String.format("host=%s, port=%s, uri=%s", this.host, this.port, this.uri));
+   String.format("host=%s, port=%s, uri=%s", this.host, this.port, this.uri));
  }
 
  public String getPassword() {

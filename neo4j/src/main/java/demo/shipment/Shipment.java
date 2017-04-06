@@ -31,7 +31,7 @@ public class Shipment {
  }
 
  public Shipment(Set<Inventory> inventories, Address deliveryAddress,
-   Warehouse fromWarehouse, ShipmentStatus shipmentStatus) {
+  Warehouse fromWarehouse, ShipmentStatus shipmentStatus) {
   this.inventories = inventories;
   this.deliveryAddress = deliveryAddress;
   this.fromWarehouse = fromWarehouse;
@@ -77,7 +77,7 @@ public class Shipment {
  @Override
  public String toString() {
   return "Shipment{" + "id=" + id + ", inventories=" + inventories
-    + ", deliveryAddress=" + deliveryAddress + ", fromWarehouse=" + fromWarehouse
-    + ", shipmentStatus=" + shipmentStatus + '}';
+   + ", deliveryAddress=" + deliveryAddress + ", fromWarehouse="
+   + fromWarehouse + ", shipmentStatus=" + shipmentStatus + '}';
  }
 }

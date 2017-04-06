@@ -8,7 +8,9 @@ public class Product {
 
  @GraphId
  private Long id;
+
  private String name, productId;
+
  private Double unitPrice;
 
  public Product() {
@@ -55,6 +57,6 @@ public class Product {
  @Override
  public String toString() {
   return "Product{" + "id=" + id + ", name='" + name + '\'' + ", productId='"
-    + productId + '\'' + ", unitPrice=" + unitPrice + '}';
+   + productId + '\'' + ", unitPrice=" + unitPrice + '}';
  }
 }
