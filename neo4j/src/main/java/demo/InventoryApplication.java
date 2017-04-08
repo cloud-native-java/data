@@ -6,7 +6,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-//@EnableConfigurationProperties(Neo4jProperties.class)
 public class InventoryApplication {
 
  public static void main(String[] args) {

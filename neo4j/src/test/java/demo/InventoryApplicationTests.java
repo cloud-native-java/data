@@ -59,9 +59,11 @@ public class InventoryApplicationTests {
 
  @Autowired
  private InventoryRepository inventoryRepository;
-//
-// @Autowired
-// private Neo4jConfiguration neo4jConfiguration;
+
+ //
+ // @Autowired
+ // private Neo4jConfiguration
+ // neo4jConfiguration;
 
  @Autowired
  private Session session;
@@ -69,9 +71,8 @@ public class InventoryApplicationTests {
  @Before
  public void setup() {
   try {
-   this.session
-    .query("MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r;", new HashMap<>())
-    .queryResults();
+   this.session.query("MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r;",
+    new HashMap<>()).queryResults();
   }
   catch (Exception e) {
    e.printStackTrace();

@@ -1,6 +1,9 @@
 package demo.catalog;
 
 import demo.product.Product;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
@@ -8,6 +11,9 @@ import org.neo4j.ogm.annotation.Relationship;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @NodeEntity
 public class Catalog {
 
@@ -18,9 +24,6 @@ public class Catalog {
  private Set<Product> products = new HashSet<>();
 
  private String name;
-
- public Catalog() {
- }
 
  public Catalog(String name) {
   this.name = name;
