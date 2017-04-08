@@ -18,12 +18,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.neo4j.ogm.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.neo4j.config.Neo4jConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -33,8 +36,8 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = { InventoryApplication.class })
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = { InventoryApplication.class })
 public class InventoryApplicationTests {
 
  private Logger log = LoggerFactory.getLogger(InventoryApplicationTests.class);
@@ -56,14 +59,17 @@ public class InventoryApplicationTests {
 
  @Autowired
  private InventoryRepository inventoryRepository;
+//
+// @Autowired
+// private Neo4jConfiguration neo4jConfiguration;
 
  @Autowired
- private Neo4jConfiguration neo4jConfiguration;
+ private Session session;
 
  @Before
  public void setup() {
   try {
-   neo4jConfiguration.getSession()
+   this.session
     .query("MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n, r;", new HashMap<>())
     .queryResults();
   }

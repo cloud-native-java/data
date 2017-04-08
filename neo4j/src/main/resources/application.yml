@@ -2,3 +2,10 @@
 #  neo4j:
 #    host: ${SPRING_NEO4J_HOST:192.168.99.100}
 #    port: ${SPRING_NEO4J_PORT:7474}
+#spring:
+#  data:
+#    neo4j:
+#      password: 0Bq1hbX1B6gX
+#      username: neo4j
+#
+#

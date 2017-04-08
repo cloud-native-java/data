@@ -8,8 +8,8 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 
-@Component
-@ConfigurationProperties(prefix = "spring.neo4j")
+//@Component
+//@ConfigurationProperties(prefix = "spring.neo4j")
 class Neo4jProperties {
 
  private String host;

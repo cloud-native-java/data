@@ -18,7 +18,7 @@ import org.springframework.data.neo4j.server.RemoteServer;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-@Configuration
+//@Configuration
 class GraphConfiguration extends Neo4jConfiguration {
 
  @Autowired
