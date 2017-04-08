@@ -1,4 +1,4 @@
-package demo.domain;
+package demo.data;
 
 import lombok.Data;
 import org.joda.time.DateTime;

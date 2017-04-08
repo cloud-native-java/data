@@ -2,7 +2,7 @@ package demo.invoice;
 
 import demo.address.Address;
 import demo.address.AddressType;
-import demo.domain.BaseEntity;
+import demo.data.BaseEntity;
 import demo.order.Order;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,6 +38,7 @@ public class Invoice extends BaseEntity {
  }
 
  public void addOrder(Order order) {
+  order.setAccountNumber(this.customerId);
   orders.add(order);
  }
 }

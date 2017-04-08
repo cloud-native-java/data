@@ -20,11 +20,12 @@ public class Account extends BaseEntity {
 
  @Id
  @GeneratedValue(strategy = GenerationType.AUTO)
- private Long id;
+ private Long id; // <1>
 
  private String accountNumber;
 
  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+ // <2>
  private Set<CreditCard> creditCards = new HashSet<>();
 
  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

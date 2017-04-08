@@ -10,13 +10,15 @@ import javax.persistence.MappedSuperclass;
 
 @Data
 @MappedSuperclass
+// <1>
 @EntityListeners(AuditingEntityListener.class)
+// <2>
 public class BaseEntity {
 
  @CreatedDate
- private Long createdAt;
+ private Long createdAt; // <3>
 
  @LastModifiedDate
- private Long lastModified;
+ private Long lastModified; // <4>
 
 }

@@ -1,6 +1,5 @@
-package demo.listeners;
+package demo.data;
 
-import demo.domain.BaseEntity;
 import org.joda.time.DateTime;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
 import org.springframework.data.mongodb.core.mapping.event.BeforeSaveEvent;

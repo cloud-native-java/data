@@ -2,7 +2,7 @@ package demo.order;
 
 import demo.address.Address;
 import demo.address.AddressType;
-import demo.domain.BaseEntity;
+import demo.data.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
