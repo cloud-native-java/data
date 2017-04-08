@@ -4,24 +4,25 @@ import demo.address.Address;
 import demo.address.AddressType;
 import demo.domain.BaseEntity;
 import demo.order.Order;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple domain class for the
- * {@link Invoice} concept of the order
- * context.
- *
- * @author Kenny Bastani
- * @author Josh Long
- */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Document
 public class Invoice extends BaseEntity {
 
- private String invoiceId, customerId;
+ @Id
+ private String invoiceId;
+
+ private String customerId;
 
  private List<Order> orders = new ArrayList<Order>();
 
@@ -36,56 +37,7 @@ public class Invoice extends BaseEntity {
   this.invoiceStatus = InvoiceStatus.CREATED;
  }
 
- @Id
- public String getInvoiceId() {
-  return invoiceId;
- }
-
- public void setInvoiceId(String invoiceId) {
-  this.invoiceId = invoiceId;
- }
-
- public List<Order> getOrders() {
-  return orders;
- }
-
- public void setOrders(List<Order> orders) {
-  this.orders = orders;
- }
-
  public void addOrder(Order order) {
   orders.add(order);
- }
-
- public String getCustomerId() {
-  return customerId;
- }
-
- public void setCustomerId(String customerId) {
-  this.customerId = customerId;
- }
-
- public Address getBillingAddress() {
-  return billingAddress;
- }
-
- public void setBillingAddress(Address billingAddress) {
-  this.billingAddress = billingAddress;
- }
-
- public InvoiceStatus getInvoiceStatus() {
-  return invoiceStatus;
- }
-
- public void setInvoiceStatus(InvoiceStatus invoiceStatus) {
-  this.invoiceStatus = invoiceStatus;
- }
-
- @Override
- public String toString() {
-  return "Invoice{" + "invoiceId='" + invoiceId + '\'' + ", customerId='"
-   + customerId + '\'' + ", orders=" + orders + ", billingAddress="
-   + billingAddress + ", invoiceStatus=" + invoiceStatus + "} "
-   + super.toString();
  }
 }
