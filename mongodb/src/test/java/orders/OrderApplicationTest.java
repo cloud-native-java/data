@@ -75,5 +75,9 @@ public class OrderApplicationTest {
   invoice.addOrder(order);
   invoice = invoiceRepository.save(invoice);
   Assert.assertEquals(invoice.getOrders().size(), 1);
+
+  // <4>
+  Assert.assertEquals(invoiceRepository.findByBillingAddress(billingAddress),
+   invoice);
  }
 }

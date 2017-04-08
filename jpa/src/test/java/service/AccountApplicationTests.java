@@ -1,5 +1,6 @@
 package service;
 
+import com.mysql.jdbc.AssertionFailedException;
 import demo.AccountApplication;
 import demo.account.Account;
 import demo.address.Address;
@@ -16,6 +17,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Collection;
+import java.util.Optional;
+
+import static demo.creditcard.CreditCardType.VISA;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AccountApplication.class)
 @ActiveProfiles(profiles = "test")
@@ -28,9 +34,7 @@ public class AccountApplicationTests {
  public void customerTest() {
   Account account = new Account("12345");
   Customer customer = new Customer("Jane", "Doe", "jane.doe@gmail.com", account);
-  CreditCard creditCard = new CreditCard("1234567801234567",
-   CreditCardType.VISA);
-
+  CreditCard creditCard = new CreditCard("1234567890", VISA);
   customer.getAccount().getCreditCards().add(creditCard);
 
   String street1 = "1600 Pennsylvania Ave NW";
@@ -46,5 +50,11 @@ public class AccountApplicationTests {
 
   Assert.assertTrue(persistedResult.getAccount().getAddresses().stream()
    .anyMatch(add -> add.getStreet1().equalsIgnoreCase(street1))); // <3>
+
+  customerRepository.findByEmailContaining(customer.getEmail()) // <4>
+   .orElseThrow(
+    () -> new AssertionFailedException(new RuntimeException(
+     "there's supposed to be a matching record!")));
+
  }
 }

@@ -16,7 +16,8 @@ public class UserService {
   this.userRepository = userRepository;
  }
 
- @CacheEvict(value = "user", key = "#user.getId()") // <1>
+ @CacheEvict(value = "user", key = "#user.getId()")
+ // <1>
  public User createUser(User user) {
 
   User result = null;
@@ -28,12 +29,14 @@ public class UserService {
   return result;
  }
 
- @Cacheable(value = "user") //<2>
+ @Cacheable(value = "user")
+ // <2>
  public User getUser(String id) {
   return this.userRepository.findOne(id);
  }
 
- @CachePut(value = "user", key = "#id") // <3>
+ @CachePut(value = "user", key = "#id")
+ // <3>
  public User updateUser(String id, User user) {
 
   User result = null;
@@ -45,7 +48,8 @@ public class UserService {
   return result;
  }
 
- @CacheEvict(value = "user", key = "#id") //<4>
+ @CacheEvict(value = "user", key = "#id")
+ // <4>
  public boolean deleteUser(String id) {
 
   boolean deleted = false;

@@ -24,12 +24,17 @@ public class Account extends BaseEntity {
 
  private String accountNumber;
 
- @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
  // <2>
+ @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
  private Set<CreditCard> creditCards = new HashSet<>();
 
  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
  private Set<Address> addresses = new HashSet<>();
+
+ public Account(String accountNumber, Set<Address> addresses) {
+  this.accountNumber = accountNumber;
+  this.addresses.addAll(addresses);
+ }
 
  public Account(String accountNumber) {
   this.accountNumber = accountNumber;
