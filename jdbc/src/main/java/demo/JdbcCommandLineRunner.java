@@ -29,7 +29,8 @@ class JdbcCommandLineRunner implements CommandLineRunner {
   // <1>
   jdbcTemplate.execute("DROP TABLE user IF EXISTS");
   jdbcTemplate
-   .execute("CREATE TABLE user( id serial, first_name VARCHAR(255), last_name VARCHAR(255), email VARCHAR(255))");
+   .execute("CREATE TABLE user( id serial, first_name " +
+      " VARCHAR(255), last_name VARCHAR(255), email VARCHAR(255))");
 
   // <2>
   List<Object[]> userRecords = Stream
